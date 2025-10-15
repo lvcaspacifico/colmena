@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -------------------- Usuários --------------------
+model User {
+  id           Int           @id @default(autoincrement()) // 4 bytes
+  nickname     String        @db.VarChar(30) // apelido curto
+  email        String        @unique @db.VarChar(100) // login/email
+  password     String        @db.VarChar(60) // bcrypt hash (60 chars fixo)
+  roleCode     Int           @db.SmallInt // 1=Admin,2=PO,3=Dev (2 bytes)
+  birthdate    DateTime      @db.Date // só data, sem hora (4 bytes)
+  createdAt    DateTime      @default(now()) @db.Timestamp(0) // sem microsegundos (4 bytes)
+  
+  userProjects UserProject[]
+  userTasks    UserTask[]
+
+  @@index([email], name: "idx_user_email")
+}
+
+// -------------------- Projects --------------------
+model Project {
+  id           Int             @id @default(autoincrement())
+  name         String          @db.VarChar(100)
+  startDate    DateTime        @db.Date // (4 bytes)
+  endDate      DateTime?       @db.Date // opcional
+  createdAt    DateTime        @default(now()) @db.Timestamp(0)
+  
+  tasks        Task[]
+  userProjects UserProject[]
+  projectLabels ProjectLabel[]
+
+  @@index([name], name: "idx_project_name")
+}
+
+// -------------------- Rel User <-> Project
+model UserProject {
+  userId      Int
+  projectId   Int
+  assignedAt  DateTime  @default(now()) @db.Timestamp(0)
+  
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@id([userId, projectId])
+  @@index([projectId], name: "idx_userproject_project")
+}
+
+// -------------------- Rel User <-> Task
+model UserTask {
+  userId      Int
+  taskId      Int
+  assignedAt  DateTime  @default(now()) @db.Timestamp(0)
+  
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task        Task      @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@id([userId, taskId])
+  @@index([taskId], name: "idx_usertask_task")
+}
+
+// -------------------- Labels
+model Label {
+  id            Int             @id @default(autoincrement())
+  type          Int             @db.SmallInt // 1=Global,2=Projeto,3=Task (2 bytes)
+  name          String          @db.VarChar(30)
+  color         String          @db.Char(7) // #ffffff (7 bytes fixo)
+  
+  projectLabels ProjectLabel[]
+  taskLabels    TaskLabel[]
+
+  @@index([type], name: "idx_label_type")
+}
+
+// -------------------- Tasks
+model Task {
+  id          Int         @id @default(autoincrement())
+  projectId   Int?
+  title       String      @db.VarChar(80)
+  content     String      @db.Text // Markdown (sem limite, mas otimizado)
+  startDate   DateTime    @db.Date
+  endDate     DateTime?   @db.Date
+  createdAt   DateTime    @default(now()) @db.Timestamp(0)
+  
+  project     Project?     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  taskLabels  TaskLabel[]
+  userTasks   UserTask[]
+
+  @@index([projectId], name: "idx_task_project")
+  @@index([title], name: "idx_task_title")
+}
+
+// -------------------- Rel Task <-> Label
+model TaskLabel {
+  taskId    Int
+  labelId   Int
+  
+  task      Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  label     Label  @relation(fields: [labelId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, labelId])
+  @@index([labelId], name: "idx_tasklabel_label")
+}
+
+// -------------------- Rel Project <-> Label
+model ProjectLabel {
+  projectId Int
+  labelId   Int
+  
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  label     Label   @relation(fields: [labelId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, labelId])
+  @@index([labelId], name: "idx_projectlabel_label")
+}

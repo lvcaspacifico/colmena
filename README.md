@@ -1,15 +1,19 @@
 # 🐝 Colmena (Backend)
 
-Colmena ("colméia" em espanhol) é uma plataforma de gerenciamento de projetos que oferece:
+Colmena ("colméia" em espanhol) é uma plataforma robusca para gerenciamento de projetos. Suas principais funcionalidades são:
 
-- Criação de projetos
-- Criação de tarefas atreladas à projetos
-    - O conteúdo do corpo de uma tarefas pode ser estilizado com Markdown, e é renderizado ao vivo em tela
-- Criação de labels para os projetos e para as tarefas
+- Criar projetos
+- Criar tarefas atreladas (ou não) à projetos
+- Criar e atrelar labels em projetos e em tarefas
 - Gerenciamento de prazos de projetos e de tarefas
-- Visualizações de projetos e tarefas por prazo, por label e em linha cronológica
+- Criar multiplas visualizações de projetos e tarefas
+    - Exemplo: Por prazo, por label, por usuário, etc
 - Atrelar usuários a projetos
 - Atrelar usuários a tarefas
+- Estilizar o conteúdo de uma tarefa com Markdown renderizado ao vivo
+- Login seguro com token JWT
+- Funcionalidades com modelo RBAC (role based access control)
+- Dashboard e funcionalidades exclusivas para usuários administradores
 
 ## Tecnologias
 
