@@ -7,10 +7,12 @@ import { createUserLimiter } from "@/middlewares/create-user-limiter";
 const userRoutes = Router();
 const userController = new UserController();
 
-userRoutes.get("/", ensureAuthenticated, userController.index);
 userRoutes.post("/", createUserLimiter, userController.create);
-userRoutes.put("/:id", ensureAuthenticated, userController.update);
-userRoutes.delete("/:id", ensureAuthenticated, userController.create);
+userRoutes.use(ensureAuthenticated);
+userRoutes.get("/", userController.index);
+userRoutes.get("/user/:id", userController.show);
+userRoutes.put("/:id", userController.update);
+userRoutes.delete("/:id", userController.delete);
 
 export { userRoutes };
 

@@ -21,14 +21,18 @@ class UserController {
   }
 
   async show(request: Request, response: Response) {
-    const userId = request.user?.id;
+    const paramsSchema = z.object({
+      id: z.string().transform((val) => Number(val)),
+    });
 
-    if (!userId) {
-      throw new InternalAppError("JWT token not found", 401);
+    const { id } = paramsSchema.parse(request.params);
+
+    if (!id) {
+      throw new InternalAppError("User ID not informed", 401);
     }
 
     const user = await prisma.user.findUnique({
-      where: { id: userId },
+      where: { id: Number(id) },
       select: {
         id: true,
         nickname: true,
