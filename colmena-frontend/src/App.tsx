@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="desktop:bg-red-500">
         <h1>🐝 Colmena</h1>
       </div>
     </>
