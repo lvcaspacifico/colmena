@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { prisma } from "@/database/prisma";
 import { z } from "zod";
 
-class TaskUserController {
+class UserTaskController {
   async create(request: Request, response: Response) {
     const bodySchema = z.object({
       userId: z.number().int().positive({ message: "User ID must be a positive integer" }),
@@ -141,4 +141,4 @@ class TaskUserController {
   }
 }
 
-export { TaskUserController };
+export { UserTaskController };

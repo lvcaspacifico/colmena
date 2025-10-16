@@ -1,10 +1,9 @@
-// UserProjectController.ts
 import { InternalAppError } from "@/utils/Errors/InternalAppError";
 import { Request, Response } from "express";
 import { prisma } from "@/database/prisma";
 import { z } from "zod";
 
-class ProjectUserController {
+class UserProjectController {
   async create(request: Request, response: Response) {
     const bodySchema = z.object({
       userId: z.number().int().positive({ message: "User ID must be a positive integer" }),
@@ -140,4 +139,4 @@ class ProjectUserController {
   }
 }
 
-export { ProjectUserController };
+export { UserProjectController };

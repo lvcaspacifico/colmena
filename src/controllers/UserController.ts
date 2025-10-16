@@ -51,6 +51,9 @@ class UserController {
   }
 
   async create(request: Request, response: Response) {
+    console.log(" JWT SECRET ==================== " + process.env.JWT_SECRET);
+    console.log(" JWT EXPIRES IN ==================== " + process.env.JWT_EXPIRATION);
+
     const bodySchema = z.object({
       nickname: z
         .string()
@@ -87,6 +90,8 @@ class UserController {
         birthdate,
       },
     });
+
+
 
     const { password: _, ...userWithoutPassword } = user;
 
@@ -198,7 +203,6 @@ class UserController {
       throw new InternalAppError("User not found", 404);
     }
 
-    // Regra de negócio: só pode deletar se for o próprio usuário ou se for admin (roleCode 1)
     if (id !== loggedUser.id && loggedUser.roleCode !== 1) {
       throw new InternalAppError("You can only delete your own profile or you must be an admin", 403);
     }

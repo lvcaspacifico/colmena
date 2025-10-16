@@ -5,6 +5,7 @@ import { prisma } from "@/database/prisma"
 import { sign, SignOptions } from "jsonwebtoken"
 import { compare } from "bcrypt"
 import { z } from "zod"
+import { hash } from "bcrypt";
 
 class SessionsController {
   async create(request: Request, response: Response) {
@@ -22,16 +23,12 @@ class SessionsController {
     if (!user) {
       throw new InternalAppError("Invalid credentials e", 401)
     }
-    console.log("SENHA do banco ===============" + user.password);
-    console.log("SENHA enviada ===============" + password);
+    
     const passwordMatched = await compare(password, user.password)
-    console.log("Did password match ================ " + passwordMatched)
+
     if (!passwordMatched) {
       throw new InternalAppError("Invalid credentials p", 401)
     }
-    // $2b$08$je8k8370IjOuyFrTIRR4hOQu68kmiWk1thkr1wiJMnDvDP9noldHa
-    // $2b$08$je8k8370IjOuyFrTIRR4hOQu68kmiWk1thkr1wiJMnDvDP9noldHa
-
     const { secret, expiresIn } = authConfig.jwt
     
     if (!secret) {

@@ -1,4 +1,4 @@
-# 🐝 Colmena (Backend)
+# 🐝 Colmena
 
 Colmena ("colméia" em espanhol) é uma plataforma robusca para gerenciamento de projetos. Suas principais funcionalidades são:
 
@@ -15,7 +15,7 @@ Colmena ("colméia" em espanhol) é uma plataforma robusca para gerenciamento de
 - Funcionalidades com modelo RBAC (role based access control)
 - Dashboard e funcionalidades exclusivas para usuários administradores
 
-## Tecnologias
+## Tecnologias do Backend
 
 <div align="center">
 
@@ -66,7 +66,13 @@ Outras especificações:
 
 ```bash
 git clone <URL_DO_REPOSITORIO>
-````
+```
+
+## Devblog (⚠️WIP)
+
+- 14-10-2025 ≈7h
+- 15-10-2025 ≈5h
+
 ---
 
 > Made with ☕ by [@lvcaspacifico](https://github.com/lvcaspacifico) 👋

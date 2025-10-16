@@ -6,8 +6,8 @@ import { labelRoutes } from "./label-routes";
 import { projectLabelRoutes } from "./project-label-routes";
 import { taskLabelRoutes } from "./task-label-routes";
 import { taskRoutes } from "./task-routes";
-import { taskUserRoutes } from "./task-user-routes";
-import { projectUserRoutes } from "./project-user-routes";
+import { userTaskRoutes } from "./user-task-routes";
+import { userProjectRoutes } from "./user-project-routes";
 
 const routes = Router();
 
@@ -18,7 +18,7 @@ routes.use("/labels", labelRoutes);
 routes.use("/tasks", taskRoutes);
 routes.use("/project-label", projectLabelRoutes);
 routes.use("/task-label", taskLabelRoutes);
-routes.use("/task-user", taskUserRoutes);
-routes.use("/project-user", projectUserRoutes);
+routes.use("/user-task", userTaskRoutes);
+routes.use("/user-project", userProjectRoutes);
 
 export { routes }

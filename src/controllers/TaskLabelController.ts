@@ -1,4 +1,3 @@
-// TaskLabelController.ts
 import { InternalAppError } from "@/utils/Errors/InternalAppError";
 import { Request, Response } from "express";
 import { prisma } from "@/database/prisma";
