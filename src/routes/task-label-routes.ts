@@ -7,6 +7,7 @@ const taskLabelRoutes = Router();
 const taskLabelController = new TaskLabelController();
 
 taskLabelRoutes.use(ensureAuthenticated);
+taskLabelRoutes.get("/task/:id", taskLabelController.showByTask);
 taskLabelRoutes.post("/", taskLabelController.create);
 taskLabelRoutes.delete("/:taskId/:labelId", taskLabelController.delete);
 

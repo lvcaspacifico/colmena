@@ -7,6 +7,7 @@ const projectLabelRoutes = Router();
 const projectLabelController = new ProjectLabelController();
 
 projectLabelRoutes.use(ensureAuthenticated);
+projectLabelRoutes.get("/project/:id", projectLabelController.showByProject);
 projectLabelRoutes.post("/", projectLabelController.create);
 projectLabelRoutes.delete("/:projectId/:labelId", projectLabelController.delete);
 

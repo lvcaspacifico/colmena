@@ -1,6 +1,7 @@
 import { InternalAppError } from "@/utils/Errors/InternalAppError";
 import { Request, Response } from "express";
 import { prisma } from "@/database/prisma";
+import { EntityIdMessage } from "@/utils/Enums/Validation/EntityIdMessage";
 import { z } from "zod";
 
 class TaskLabelController {
@@ -68,6 +69,28 @@ class TaskLabelController {
 
     return response.status(204).send();
   }
+
+  async showByTask(request: Request, response: Response) { 
+    const requestParams = z.object({
+      id: z.string().transform((val) => Number(val)).refine((val) => !isNaN(val) && val > 0, { message: EntityIdMessage.MISSING_OR_NAN})
+    })
+
+    const { id } = requestParams.parse(request.params);
+
+    const labels = await prisma.taskLabel.findMany({
+      where: { taskId: id },
+      include: {
+        label: {
+          select: {
+            name: true,
+            color: true
+          }
+        }
+      }
+    })
+    
+    return response.status(200).json(labels);
+  } 
 }
 
 export { TaskLabelController };
