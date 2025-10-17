@@ -13,7 +13,6 @@ export function HasRoleCodeRoutes(){
         <Routes>
             <Route path="/" element={<GeneralLayout/>}>
                 <Route index element={<DashboardPage />} />
-                <Route path="dashboard" element={<DashboardPage/>}/>
                 <Route path="projects/*" element={<ProjectRoutes/>}/>
                 <Route path="tasks/*" element={<TaskRoutes/>}/>
                 <Route path="labels/*" element={<LabelRoutes/>}/>

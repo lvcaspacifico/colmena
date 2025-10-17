@@ -45,7 +45,7 @@ export function TasksPage() {
     <>
             <GenericBreadCrumb items=
                             {[
-                                { type: "link", label: "Dashboard", to: "/dashboard" },
+                                { type: "link", label: "Dashboard", to: "/" },
                                 { type: "text", label: "Tasks"}
                             ]}> 
             </GenericBreadCrumb>

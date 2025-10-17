@@ -154,7 +154,7 @@ export function LabelsPage() {
     <>
       <GenericBreadCrumb
         items={[
-          { type: "link", label: "Dashboard", to: "/dashboard" },
+          { type: "link", label: "Dashboard", to: "/" },
           { type: "text", label: "Labels" },
         ]}
       />

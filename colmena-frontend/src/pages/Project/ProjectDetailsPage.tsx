@@ -286,7 +286,7 @@ export function ProjectDetailsPage() {
     <>
         <GenericBreadCrumb items=
                         {[
-                            { type: "link", label: "Dashboard", to: "/dashboard" },
+                            { type: "link", label: "Dashboard", to: "/" },
                             { type: "link", label: "Projects", to: "/projects" },
                             { type: "text", label: "Project Detail"}
                         ]}> 

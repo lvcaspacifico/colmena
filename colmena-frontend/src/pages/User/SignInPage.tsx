@@ -29,7 +29,7 @@ export function SignInPage(){
             const response = await api.post("/sessions", data);
             console.log(response.data);
             auth.save(response.data);
-            navigate("/dashboard");
+            navigate("/");
 
         } catch (error) {
             if(error instanceof ZodError){
