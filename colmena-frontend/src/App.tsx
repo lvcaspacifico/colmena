@@ -1,5 +1,8 @@
 import { IndexRoutes } from "./routes/IndexRoutes";
 import { AuthenticationProvider } from "./contexts/AuthenticationContext";
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function App() {
 

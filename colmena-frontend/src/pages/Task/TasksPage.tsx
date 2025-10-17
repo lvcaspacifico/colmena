@@ -4,6 +4,7 @@ import { GenericHeaderOne } from "../../components/Tipography/GenericHeaderOne";
 import { GenericLink } from "../../components/General/GenericLink";
 import { GenericButton } from "../../components/Forms/GenericButton";
 import { useNavigate } from "react-router";
+import { GenericBreadCrumb } from "../../components/General/GenericBreadCrumb";
 
 type Task = {
   id: number;
@@ -41,6 +42,14 @@ export function TasksPage() {
   }, []);
 
   return (
+    <>
+            <GenericBreadCrumb items=
+                            {[
+                                { type: "link", label: "Dashboard", to: "/dashboard" },
+                                { type: "text", label: "Tasks"}
+                            ]}> 
+            </GenericBreadCrumb>
+    
     <div className="bg-blue-500 p-4 m-4 flex flex-col items-start">
       <div className="flex w-full justify-between items-center mb-4">
         <GenericHeaderOne label="Tasks" />
@@ -75,5 +84,6 @@ export function TasksPage() {
         </ul>
       )}
     </div>
+    </>
   );
 }

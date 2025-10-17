@@ -4,6 +4,7 @@ import { GenericHeaderOne } from "../../components/Tipography/GenericHeaderOne";
 import { GenericLink } from "../../components/General/GenericLink";
 import { GenericButton } from "../../components/Forms/GenericButton";
 import { useNavigate } from "react-router";
+import { GenericBreadCrumb } from "../../components/General/GenericBreadCrumb";
 
 type Project = {
   id: number;
@@ -39,6 +40,13 @@ export function ProjectsPage() {
   }, []);
 
   return (
+    <>
+    <GenericBreadCrumb items=
+                    {[
+                        { type: "link", label: "Dashboard", to: "/dashboard" },
+                        { type: "text", label: "Projects"}
+                    ]}> 
+    </GenericBreadCrumb>
     <div className="bg-red-200 p-4 m-4 flex flex-col items-start">
       
       <div className="flex w-full justify-between items-center mb-4">                    
@@ -69,5 +77,6 @@ export function ProjectsPage() {
         </ul>
       )}
     </div>
+    </>
   );
 }

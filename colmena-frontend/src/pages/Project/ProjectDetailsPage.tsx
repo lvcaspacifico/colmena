@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { GenericHeaderOne } from "../../components/Tipography/GenericHeaderOne";
 import { GenericButton } from "../../components/Forms/GenericButton"
+import { GenericBreadCrumb } from "../../components/General/GenericBreadCrumb";
 
 type Project = {
   id: number;
@@ -282,6 +283,15 @@ export function ProjectDetailsPage() {
   };
 
   return (
+    <>
+        <GenericBreadCrumb items=
+                        {[
+                            { type: "link", label: "Dashboard", to: "/dashboard" },
+                            { type: "link", label: "Projects", to: "/projects" },
+                            { type: "text", label: "Project Detail"}
+                        ]}> 
+        </GenericBreadCrumb>
+    
     <div className="p-4 m-4 flex flex-col items-start">
       {isLoading ? (
         <p className="text-white mt-4">Loading project...</p>
@@ -573,5 +583,6 @@ export function ProjectDetailsPage() {
         <p className="text-white mt-4">Project not found.</p>
       )}
     </div>
+    </>
   );
 }
