@@ -75,7 +75,7 @@ export function CreateProjectPage() {
   return (
     <div className="w-full flex flex-col items-center">
       <h1 className="text-3xl font-bold text-black text-center mt-20 mb-2">
-        Create a New Project 🛠️
+        Create a New Project
       </h1>
       <p className="text-lg text-black text-center">
         Fill out the details below to start a new project

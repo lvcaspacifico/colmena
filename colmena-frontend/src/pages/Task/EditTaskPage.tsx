@@ -27,10 +27,6 @@ const editTaskSchema = z
       .trim()
       .min(2, { message: "Title must be at least 2 characters long" })
       .max(200, { message: "Title must be at most 200 characters long" }),
-    content: z
-      .string()
-      .trim()
-      .min(2, { message: "Content must be at least 2 characters long" }),
     projectId: z.number().nullable(),
     startDate: z
       .string()
@@ -77,7 +73,6 @@ export function EditTaskPage() {
         const task = response.data;
         reset({
           title: task.title,
-          content: task.content,
           projectId: task.projectId,
           startDate: task.startDate.split("T")[0],
           endDate: task.endDate ? task.endDate.split("T")[0] : "",
@@ -109,7 +104,6 @@ export function EditTaskPage() {
     try {
       const payload = {
         title: data.title,
-        content: data.content,
         projectId: data.projectId || null,
         startDate: data.startDate,
         endDate: data.endDate || undefined,
@@ -146,7 +140,7 @@ export function EditTaskPage() {
   return (
     <div className="w-full flex flex-col items-center">
       <h1 className="text-3xl font-bold text-black text-center mt-20 mb-2">
-        Edit Task 🛠️
+        Edit Task
       </h1>
       <p className="text-lg text-black text-center">
         Update the task details below
@@ -162,18 +156,6 @@ export function EditTaskPage() {
         {errors.title && (
           <p className="text-xs text-center text-red-500 font-semibold mt-1 mb-2">
             {errors.title.message}.
-          </p>
-        )}
-
-        <GenericTextInput
-          {...register("content")}
-          legend="Task Content"
-          type="text"
-          placeholder="e.g. Details about the task"
-        />
-        {errors.content && (
-          <p className="text-xs text-center text-red-500 font-semibold mt-1 mb-2">
-            {errors.content.message}.
           </p>
         )}
 

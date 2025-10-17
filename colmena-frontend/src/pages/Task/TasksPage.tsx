@@ -43,47 +43,52 @@ export function TasksPage() {
 
   return (
     <>
-            <GenericBreadCrumb items=
-                            {[
-                                { type: "link", label: "Dashboard", to: "/" },
-                                { type: "text", label: "Tasks"}
-                            ]}> 
-            </GenericBreadCrumb>
-    
-    <div className="bg-blue-500 p-4 m-4 flex flex-col items-start">
-      <div className="flex w-full justify-between items-center mb-4">
-        <GenericHeaderOne label="Tasks" />
-        <GenericButton
-          onClick={handleGoToCreateTask}
-          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
-        >
-          + Add Task
-        </GenericButton>
-      </div>
+      <GenericBreadCrumb
+        items={[
+          { type: "link", label: "Dashboard", to: "/" },
+          { type: "text", label: "Tasks" },
+        ]}
+      />
 
-      {isLoading ? (
-        <p className="text-white mt-4">Loading tasks...</p>
-      ) : errorMessage ? (
-        <p className="text-sm text-red-200 font-bold mt-4">⚠️ {errorMessage}.</p>
-      ) : tasks.length === 0 ? (
-        <p className="text-white mt-4">No tasks found.</p>
-      ) : (
-        <ul className="mt-4 space-y-2">
-          {tasks.map((task) => (
-            <li
-              key={task.id}
-              className="text-white font-medium bg-black/20 px-3 py-2 rounded flex justify-between items-center"
-            >
-              {task.title}
-              <GenericLink
-                to={`/tasks/task-details/${task.id}`}
-                label="See task"
-              />
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+      <div className="m-4 flex flex-col items-start">
+        <div className="flex w-full justify-between items-center mb-4">
+          <GenericHeaderOne label="Tasks" />
+          <GenericButton
+            onClick={handleGoToCreateTask}
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+          >
+            + Add Task
+          </GenericButton>
+        </div>
+
+        {isLoading ? (
+          <p className="text-white mt-4">Loading tasks...</p>
+        ) : errorMessage ? (
+          <p className="text-sm text-red-500 font-bold mt-4">⚠️ {errorMessage}.</p>
+        ) : tasks.length === 0 ? (
+          <p className="text-white mt-4">No tasks found.</p>
+        ) : (
+          <ul className="flex flex-col mb-4 w-full">
+            {tasks.map((task) => (
+              <li
+                key={task.id}
+                className="flex justify-between items-center p-4 border-b-1 border-b-gray-400 first:border-t-1 first:border-t-gray-400 text-black bg-white"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="text-black bg-amber-200 w-10 h-10 flex items-center justify-center rounded border border-gray-300">
+                    T
+                  </div>
+                  <GenericLink
+                    className="text-md text-black font-semibold m-0"
+                    to={`/tasks/task-details/${task.id}`}
+                    label={task.title}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 }

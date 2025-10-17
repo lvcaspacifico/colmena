@@ -302,60 +302,64 @@ export function ProjectDetailsPage() {
         <>
           <div className="w-full flex justify-between items-center mb-4">
             <GenericHeaderOne label={project.name} extraClassName="" />
-            <GenericButton
-              onClick={deleteProject}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
-            >
-              Delete Project
-            </GenericButton>
           </div>
 
           <div className="w-full bg-white border-black border-1 rounded-lg p-6 mb-4">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl text-black font-bold">Project Details:</h2>
-              <GenericButton
-                onClick={navigateToEditPage}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
-              >
-                Edit Project
-              </GenericButton>
-            </div>
-            <p className="mb-2">
+               <div>
+              <p className="">
               <span className="font-bold">Start Date: </span>{formatDateTimeString(project.startDate)}
             </p>
             {project.endDate && (
-              <p className="mb-2">
+              <p className="">
                <span className="font-bold">End Date: </span>{formatDateTimeString(project.endDate)}
               </p>
             )}
-            <p className="mb-2">
+            <p className="">
               <span className="font-bold">Created At: </span>{formatDateTimeString(project.createdAt)}
             </p>
+            </div>
+                     <div className="flex gap-2 self-start">
+                  <GenericButton
+                  onClick={navigateToEditPage}
+                  className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                  >
+                  Edit Project
+                  </GenericButton>
+                  <GenericButton
+                  onClick={deleteProject}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                  >
+              Delete Project
+            </GenericButton>
+              </div>
+            </div>
+           
           </div>
 
 
-          <div className="w-full  bg-white border-1 border-black rounded-lg overflow-hidden">
-            <div className="flex border-b border-blue-400">
+          <div className="w-full p-2  bg-white border-1 border-black rounded-lg overflow-hidden">
+            <div className="flex text-sm gap-2">
               <button
                 onClick={() => setActiveTab("tasks")}
-                className={`flex-1 px-4 py-3 text-black font-medium transition-colors ${
-                  activeTab === "tasks" ? "bg-blue-700" : "hover:bg-blue-500"
+                 className={`flex-1 px-4 py-3 text-black transition-colors ${
+                  activeTab === "tasks" ? "border-b-2 border-blue-500 text-black" : "border-b-2 border-black"
                 }`}
               >
                 Project Tasks
               </button>
               <button
                 onClick={() => setActiveTab("labels")}
-                className={`flex-1 px-4 py-3 text-black font-medium transition-colors ${
-                  activeTab === "labels" ? "bg-blue-700" : "hover:bg-blue-500"
+                 className={`flex-1 px-4 py-3 text-black transition-colors ${
+                  activeTab === "labels" ? "border-b-2 border-blue-500 text-black" : "border-b-2 border-black"
                 }`}
               >
                 Project Labels
               </button>
               <button
                 onClick={() => setActiveTab("users")}
-                className={`flex-1 px-4 py-3 text-black font-medium transition-colors ${
-                  activeTab === "users" ? "border-b-2 border-blue-500 text-black" : "border-b-2"
+                className={`flex-1 px-4 py-3 text-black transition-colors ${
+                  activeTab === "users" ? "border-b-2 border-blue-500 text-black" : "border-b-2 border-black"
                 }`}
               >
                 Project Users
@@ -366,42 +370,42 @@ export function ProjectDetailsPage() {
               {activeTab === "tasks" && (
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl text-white font-bold">Project Tasks</h2>
+                    <h2 className="text-xl text-black font-bold">Project Tasks</h2>
                     <GenericButton
                       onClick={handleShowAddTask}
                       className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
                     >
-                      + Add Task
+                      Add new
                     </GenericButton>
                   </div>
 
                   {tasksLoading ? (
                     <p className="text-white">Loading tasks...</p>
                   ) : projectTasks.length === 0 ? (
-                    <p className="text-white">No tasks linked to this project.</p>
+                    <p className="text-black">No tasks linked to this project.</p>
                   ) : (
                     <div className="space-y-2">
                       {projectTasks.map((task) => (
                         <div
                           key={task.id}
-                          className="flex items-center justify-between bg-blue-700 text-white px-4 py-3 rounded"
+                          className="flex items-center justify-between bg-black text-white px-4 py-3 rounded"
                         >
                           <div className="flex-1">
-                            <span className="font-medium">{task.title}</span>
-                            <p className="text-sm text-blue-200 mt-1">
-                              {new Date(task.startDate).toLocaleDateString()} - {new Date(task.endDate).toLocaleDateString()}
+                            <span className="font-medium text-lg">{task.title}</span>
+                            <p className="text-sm text-white mt-1">
+                              <span className="font-semibold">Starts:</span> {new Date(task.startDate).toLocaleDateString()} | <span className="font-semibold">Ends:</span> {new Date(task.endDate).toLocaleDateString()}
                             </p>
                           </div>
                           <div className="flex gap-2">
                             <GenericButton
                               onClick={() => navigate(`/tasks/task-details/${task.id}`)}
-                              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
+                              className="bg-black hover:bg-gray-700 border-1 border-white text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
                             >
                               View
                             </GenericButton>
                             <button
                               onClick={() => removeTaskFromProject(task.id)}
-                              className="text-red-300 hover:text-red-100 font-bold px-2"
+                              className="text-white font-bold px-2 hover:cursor-pointer"
                             >
                               ✕
                             </button>
@@ -412,7 +416,7 @@ export function ProjectDetailsPage() {
                   )}
 
                   {showAddTask && (
-                    <div className="mt-4 bg-blue-700 p-4 rounded">
+                    <div className="mt-4 bg-black p-4 rounded">
                       <h3 className="text-white font-bold mb-3">Select a Task</h3>
                       <div className="space-y-2 max-h-60 overflow-y-auto">
                         {availableTasks.map((task) => (
@@ -422,8 +426,8 @@ export function ProjectDetailsPage() {
                             disabled={isTaskAlreadyAdded(task.id)}
                             className={`w-full text-left px-3 py-2 rounded transition-colors ${
                               isTaskAlreadyAdded(task.id)
-                                ? "bg-gray-500 text-gray-300 cursor-not-allowed"
-                                : "bg-blue-800 hover:bg-blue-900 text-white"
+                                ? "bg-gray-700 line-through text-gray-300 cursor-not-allowed"
+                                : "bg-green-300 hover:cursor-pointer hover:bg-green-400 text-black"
                             }`}
                           >
                             {task.title} {isTaskAlreadyAdded(task.id) && "(already added)"}
@@ -432,7 +436,7 @@ export function ProjectDetailsPage() {
                       </div>
                       <button
                         onClick={() => setShowAddTask(false)}
-                        className="mt-3 text-white underline"
+                        className="mt-3 font-bold text-white underline hover:cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -444,30 +448,30 @@ export function ProjectDetailsPage() {
               {activeTab === "labels" && (
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl text-white font-bold">Project Labels</h2>
+                    <h2 className="text-xl text-black font-bold">Project Labels</h2>
                     <GenericButton
                       onClick={handleShowAddLabel}
                       className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
                     >
-                      + Add Label
+                      Add new
                     </GenericButton>
                   </div>
 
                   {labelsLoading ? (
                     <p className="text-white">Loading labels...</p>
                   ) : projectLabels.length === 0 ? (
-                    <p className="text-white">No labels linked to this project.</p>
+                    <p className="text-black">No labels linked to this project.</p>
                   ) : (
                     <div className="flex flex-wrap gap-2">
                       {projectLabels.map((pl) => (
                         <div
                           key={pl.labelId}
-                          className="flex items-center gap-2 bg-blue-700 text-white px-3 py-2 rounded"
+                          className="flex items-center gap-2 bg-black text-white font-semibold px-3 py-2 rounded"
                         >
                           <span>🏷️ {pl.label.name}</span>
                           <button
                             onClick={() => removeLabelFromProject(pl.labelId)}
-                            className="text-red-300 hover:text-red-100 font-bold"
+                            className="text-white hover:cursor-pointer font-bold"
                           >
                             ✕
                           </button>
@@ -477,14 +481,14 @@ export function ProjectDetailsPage() {
                   )}
 
                   {showAddLabel && (
-                    <div className="mt-4 bg-blue-700 p-4 rounded">
+                    <div className="mt-4 bg-black p-4 rounded">
                       <div className="flex justify-between items-center mb-3">
                         <h3 className="text-white font-bold">Select a Label</h3>
                         <GenericButton
                           onClick={() => navigate("/labels")}
-                          className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
+                          className="bg-bçacl hover:cursor-pointer border-1 hover:bg-gray-700 border-white text-white px-4 py-2 rounded text-sm transition-colors w-auto h-auto mt-0"
                         >
-                          + Create New Label
+                          Create new
                         </GenericButton>
                       </div>
                       <div className="space-y-2 max-h-60 overflow-y-auto">
@@ -495,8 +499,8 @@ export function ProjectDetailsPage() {
                             disabled={isLabelAlreadyAdded(label.id)}
                             className={`w-full text-left px-3 py-2 rounded transition-colors ${
                               isLabelAlreadyAdded(label.id)
-                                ? "bg-gray-500 text-gray-300 cursor-not-allowed"
-                                : "bg-blue-800 hover:bg-blue-900 text-white"
+                                ? "bg-gray-700 line-through text-gray-300 cursor-not-allowed"
+                                : "bg-green-300 hover:cursor-pointer hover:bg-green-400 text-black"
                             }`}
                           >
                             🏷️ {label.name} {isLabelAlreadyAdded(label.id) && "(already added)"}
@@ -505,7 +509,7 @@ export function ProjectDetailsPage() {
                       </div>
                       <button
                         onClick={() => setShowAddLabel(false)}
-                        className="mt-3 text-white underline"
+                        className="mt-3 font-bold text-white underline hover:cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -517,30 +521,30 @@ export function ProjectDetailsPage() {
               {activeTab === "users" && (
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl text-white font-bold">Project Users</h2>
+                    <h2 className="text-xl text-black font-bold">Project Users</h2>
                     <GenericButton
                       onClick={handleShowAddUser}
                       className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
                     >
-                      + Add User
+                      Add new
                     </GenericButton>
                   </div>
 
                   {usersLoading ? (
                     <p className="text-white">Loading users...</p>
                   ) : projectUsers.length === 0 ? (
-                    <p className="text-white">No users linked to this project.</p>
+                    <p className="text-black">No users linked to this project.</p>
                   ) : (
                     <div className="space-y-2">
                       {projectUsers.map((pu) => (
                         <div
                           key={pu.userId}
-                          className="flex items-center justify-between bg-blue-700 text-white px-4 py-3 rounded"
+                          className="flex items-center justify-between bg-black text-white px-4 py-3 rounded"
                         >
                           <span className="font-medium">{pu.user.nickname}</span>
                           <button
                             onClick={() => removeUserFromProject(pu.userId)}
-                            className="text-red-300 hover:text-red-100 font-bold"
+                            className="text-white hover:cursor-pointer font-bold"
                           >
                             ✕
                           </button>
@@ -550,7 +554,7 @@ export function ProjectDetailsPage() {
                   )}
 
                   {showAddUser && (
-                    <div className="mt-4 bg-blue-700 p-4 rounded">
+                    <div className="mt-4 bg-black p-4 rounded">
                       <h3 className="text-white font-bold mb-3">Select a User</h3>
                       <div className="space-y-2 max-h-60 overflow-y-auto">
                         {availableUsers.map((user) => (
@@ -560,8 +564,8 @@ export function ProjectDetailsPage() {
                             disabled={isUserAlreadyAdded(user.id)}
                             className={`w-full text-left px-3 py-2 rounded transition-colors ${
                               isUserAlreadyAdded(user.id)
-                                ? "bg-gray-500 text-gray-300 cursor-not-allowed"
-                                : "bg-blue-800 hover:bg-blue-900 text-white"
+                                ? "bg-gray-700 line-through text-gray-300 cursor-not-allowed"
+                                : "bg-green-300 hover:cursor-pointer hover:bg-green-400 text-black"
                             }`}
                           >
                             {user.nickname} ({user.email}) {isUserAlreadyAdded(user.id) && "(already added)"}
@@ -570,7 +574,7 @@ export function ProjectDetailsPage() {
                       </div>
                       <button
                         onClick={() => setShowAddUser(false)}
-                        className="mt-3 text-white underline"
+                        className="mt-3 font-bold text-white underline hover:cursor-pointer"
                       >
                         Cancel
                       </button>

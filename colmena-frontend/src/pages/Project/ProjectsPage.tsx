@@ -48,6 +48,7 @@ export function ProjectsPage() {
                         { type: "text", label: "Projects"}
                     ]}> 
     </GenericBreadCrumb>
+    
     <div className="m-4 flex flex-col items-start">
       <div className="flex w-full justify-between items-center mb-4">                    
         <GenericHeaderOne label="Projects"/>

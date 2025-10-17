@@ -112,13 +112,13 @@ export function EditProjectPage() {
   return (
     <div className="w-full flex flex-col items-center">
       <h1 className="text-3xl font-bold text-black text-center mt-20 mb-2">
-        Edit Project 🛠️
+        Edit Project
       </h1>
       <p className="text-lg text-black text-center">
         Update the project details below
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col my-6 w-full max-w-md">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center my-6 w-full max-w-md">
         <GenericTextInput
           {...register("name")}
           legend="Project name"
@@ -146,13 +146,13 @@ export function EditProjectPage() {
         )}
 
         <div className="flex gap-2 mt-4">
-          <GenericButton isLoading={isSubmitting} type="submit" className="bg-green-600 hover:bg-green-700">
+          <GenericButton isLoading={isSubmitting} type="submit" className="bg-green-600 hover:bg-green-700 max-w-35">
             Save
           </GenericButton>
           <GenericButton
             type="button"
             onClick={handleDelete}
-            className="bg-red-600 hover:bg-red-700"
+            className="bg-red-600 hover:bg-red-700 max-w-35"
           >
             Delete
           </GenericButton>
