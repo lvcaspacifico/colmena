@@ -8,3 +8,52 @@
   --color-colmena-orange: #ff9c12;
   --color-colmena-orange-500: #FFB912;
 }
+
+
+.task-content-markdown h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 0.5rem;
+}
+
+.task-content-markdown h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 0.4rem;
+}
+
+.task-content-markdown a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.task-content-markdown p {
+  color: black;
+  margin-bottom: 0.5rem;
+}
+
+.task-content-markdown ul,
+.task-content-markdown ol {
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.task-content-markdown code {
+  background-color: rgb(150, 150, 150);
+  color: #9dfa08;
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+
+.task-content-markdown pre code {
+  background-color: #111827;
+  color: #fcd34d;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  display: block;
+  overflow-x: auto;
+}

@@ -55,7 +55,6 @@ export function EditProjectPage() {
     mode: "onTouched",
   });
 
-  // Carrega dados do projeto existente
   useEffect(() => {
     async function fetchProject() {
       try {
