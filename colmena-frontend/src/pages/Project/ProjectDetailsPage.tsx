@@ -4,6 +4,7 @@ import { api } from "../../services/api";
 import { GenericHeaderOne } from "../../components/Tipography/GenericHeaderOne";
 import { GenericButton } from "../../components/Forms/GenericButton"
 import { GenericBreadCrumb } from "../../components/General/GenericBreadCrumb";
+import { formatDateTimeString } from "../../utils/String/formatDateTimeString";
 
 type Project = {
   id: number;
@@ -292,7 +293,7 @@ export function ProjectDetailsPage() {
                         ]}> 
         </GenericBreadCrumb>
     
-    <div className="p-4 m-4 flex flex-col items-start">
+    <div className="m-4 flex flex-col items-start">
       {isLoading ? (
         <p className="text-white mt-4">Loading project...</p>
       ) : errorMessage ? (
@@ -309,9 +310,9 @@ export function ProjectDetailsPage() {
             </GenericButton>
           </div>
 
-          <div className="w-full bg-blue-600 rounded-lg p-6 mb-4">
+          <div className="w-full bg-white border-black border-1 rounded-lg p-6 mb-4">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl text-white font-bold">Project Details</h2>
+              <h2 className="text-xl text-black font-bold">Project Details:</h2>
               <GenericButton
                 onClick={navigateToEditPage}
                 className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
@@ -319,24 +320,25 @@ export function ProjectDetailsPage() {
                 Edit Project
               </GenericButton>
             </div>
-            <p className="text-white mb-2">
-              Start Date: {new Date(project.startDate).toLocaleDateString()}
+            <p className="mb-2">
+              <span className="font-bold">Start Date: </span>{formatDateTimeString(project.startDate)}
             </p>
             {project.endDate && (
-              <p className="text-white mb-2">
-                End Date: {new Date(project.endDate).toLocaleDateString()}
+              <p className="mb-2">
+               <span className="font-bold">End Date: </span>{formatDateTimeString(project.endDate)}
               </p>
             )}
-            <p className="text-white mb-2">
-              Created At: {new Date(project.createdAt).toLocaleDateString()}
+            <p className="mb-2">
+              <span className="font-bold">Created At: </span>{formatDateTimeString(project.createdAt)}
             </p>
           </div>
 
-          <div className="w-full bg-blue-600 rounded-lg overflow-hidden">
+
+          <div className="w-full  bg-white border-1 border-black rounded-lg overflow-hidden">
             <div className="flex border-b border-blue-400">
               <button
                 onClick={() => setActiveTab("tasks")}
-                className={`flex-1 px-4 py-3 text-white font-medium transition-colors ${
+                className={`flex-1 px-4 py-3 text-black font-medium transition-colors ${
                   activeTab === "tasks" ? "bg-blue-700" : "hover:bg-blue-500"
                 }`}
               >
@@ -344,7 +346,7 @@ export function ProjectDetailsPage() {
               </button>
               <button
                 onClick={() => setActiveTab("labels")}
-                className={`flex-1 px-4 py-3 text-white font-medium transition-colors ${
+                className={`flex-1 px-4 py-3 text-black font-medium transition-colors ${
                   activeTab === "labels" ? "bg-blue-700" : "hover:bg-blue-500"
                 }`}
               >
@@ -352,8 +354,8 @@ export function ProjectDetailsPage() {
               </button>
               <button
                 onClick={() => setActiveTab("users")}
-                className={`flex-1 px-4 py-3 text-white font-medium transition-colors ${
-                  activeTab === "users" ? "bg-blue-700" : "hover:bg-blue-500"
+                className={`flex-1 px-4 py-3 text-black font-medium transition-colors ${
+                  activeTab === "users" ? "border-b-2 border-blue-500 text-black" : "border-b-2"
                 }`}
               >
                 Project Users
@@ -479,7 +481,7 @@ export function ProjectDetailsPage() {
                       <div className="flex justify-between items-center mb-3">
                         <h3 className="text-white font-bold">Select a Label</h3>
                         <GenericButton
-                          onClick={() => navigate("/labels/create-label")}
+                          onClick={() => navigate("/labels")}
                           className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
                         >
                           + Create New Label

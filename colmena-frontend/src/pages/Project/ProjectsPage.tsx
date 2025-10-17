@@ -5,6 +5,7 @@ import { GenericLink } from "../../components/General/GenericLink";
 import { GenericButton } from "../../components/Forms/GenericButton";
 import { useNavigate } from "react-router";
 import { GenericBreadCrumb } from "../../components/General/GenericBreadCrumb";
+import { GenericHorizontalLine } from "../../components/General/GenericHorizontalLine";
 
 type Project = {
   id: number;
@@ -47,32 +48,38 @@ export function ProjectsPage() {
                         { type: "text", label: "Projects"}
                     ]}> 
     </GenericBreadCrumb>
-    <div className="bg-red-200 p-4 m-4 flex flex-col items-start">
-      
+    <div className="m-4 flex flex-col items-start">
       <div className="flex w-full justify-between items-center mb-4">                    
         <GenericHeaderOne label="Projects"/>
         <GenericButton
           onClick={handleGoToCreateProject}
           className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0">
-                + Add Project
+               Create new
           </GenericButton>
-        </div>
+      </div>
 
       {isLoading ? (
         <p className="text-white mt-4">Loading projects...</p>
       ) : errorMessage ? (
-        <p className="text-sm text-red-200 font-bold mt-4">⚠️ {errorMessage}.</p>
+        <p className="text-sm text-red-500 font-bold mt-4">⚠️ {errorMessage}.</p>
       ) : projects.length === 0 ? (
         <p className="text-white mt-4">No projects found.</p>
       ) : (
-        <ul className="mt-4 space-y-2">
+        <ul className="flex flex-col mb-4 w-full">
           {projects.map((project) => (
+            
             <li
               key={project.id}
-              className="text-white font-medium bg-black/20 px-3 py-2 rounded"
-            >
-              {project.name} | <GenericLink to={`/projects/project-details/${project.id}`} label="See project"/>
-            </li>
+              className="flex justify-between items-center p-4 border-b-gray-400 first:border-t-1 first:border-t-gray-400 border-b-1 text-black">
+             
+              <div className="flex items-center gap-2">
+                <div className="text-black bg-pink-300 w-10 h-10 flex 
+                items-center justify-center rounded border-1 border-gray-300">P</div>
+                <GenericLink className="text-md text-black font-semibold m-0" to={`/projects/project-details/${project.id}`} label={project.name}/>
+              </div>
+            
+            
+            </li> 
           ))}
         </ul>
       )}

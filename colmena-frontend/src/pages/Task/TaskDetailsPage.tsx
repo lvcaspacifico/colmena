@@ -427,7 +427,7 @@ export function TaskDetailsPage() {
                         <div className="flex justify-between items-center mb-3">
                           <h4 className="text-white font-bold">Select a Label</h4>
                           <GenericButton
-                            onClick={() => navigate("/labels/create-label")}
+                            onClick={() => navigate("/labels")}
                             className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
                           >
                             + Create New Label

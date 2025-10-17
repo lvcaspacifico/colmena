@@ -62,9 +62,6 @@ export function GenericDashboardLine({ sharedData }: Props) {
 
         <div className="flex flex-col gap-1  text-gray-700 text-xs text-right italic font-medium">
           <div>Created {formatDateTimeString(createdAt)}</div>
-          {joinedAt && (
-            <div>Joined {formatDateTimeString(joinedAt)}</div>
-          )}
         </div>
       </li>
       </>
@@ -72,7 +69,7 @@ export function GenericDashboardLine({ sharedData }: Props) {
   }
 
   return (
-    <ul className="flex flex-col border-collapse">
+    <ul className="flex flex-col">
       {sharedData.projects.map((p) => renderLine(p, "project", p.createdAt))}
       {sharedData.tasks.map((t) => renderLine(t, "task", t.createdAt))}
     </ul>
