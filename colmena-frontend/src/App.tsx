@@ -1,16 +1,12 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import './App.css'
+import { IndexRoutes } from "./routes/IndexRoutes";
+import { AuthenticationProvider } from "./contexts/AuthenticationContext";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div className="desktop:bg-red-500">
-        <h1>🐝 Colmena</h1>
-      </div>
-    </>
+    <AuthenticationProvider>
+      <IndexRoutes/>
+    </AuthenticationProvider>
   )
 }
 

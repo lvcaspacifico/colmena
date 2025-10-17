@@ -21,18 +21,18 @@ class SessionsController {
     })
 
     if (!user) {
-      throw new InternalAppError("Invalid credentials e", 401)
+      throw new InternalAppError("Invalid credentials", 401)
     }
     
     const passwordMatched = await compare(password, user.password)
 
     if (!passwordMatched) {
-      throw new InternalAppError("Invalid credentials p", 401)
+      throw new InternalAppError("Invalid credentials", 401)
     }
     const { secret, expiresIn } = authConfig.jwt
     
     if (!secret) {
-      throw new InternalAppError("Invalid credentials settings", 500)
+      throw new InternalAppError("Invalid credentials | Internal settings", 500)
     }
 
     const token = sign(

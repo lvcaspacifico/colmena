@@ -77,25 +77,20 @@ class UserController {
 
     const userWithSameEmail = await prisma.user.findFirst({ where: { email } });
 
-    if (userWithSameEmail) throw new InternalAppError("There's already an user with this email");
+    if (!userWithSameEmail) {
+      const hashedPassword = await hash(password, 8);
+      await prisma.user.create({
+        data: {
+          nickname,
+          email,
+          password: hashedPassword,
+          roleCode: 3,
+          birthdate,
+        },
+      });
+    }
 
-    const hashedPassword = await hash(password, 8);
-
-    const user = await prisma.user.create({
-      data: {
-        nickname,
-        email,
-        password: hashedPassword,
-        roleCode: 3,
-        birthdate,
-      },
-    });
-
-
-
-    const { password: _, ...userWithoutPassword } = user;
-
-    return response.status(201).json(userWithoutPassword);
+    return response.status(201).json({ message: "If the email is new, your account has been created." });
   }
 
   async update(request: Request, response: Response) {
