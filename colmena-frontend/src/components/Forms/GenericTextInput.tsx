@@ -1,10 +1,13 @@
+import { classMerge } from "../../utils/Style/classMerge"
+
 type Props = React.ComponentProps<"input"> & {
     legend?:string
+    fieldSetExtraClassName?: string
 }
 
-export function GenericTextInput({ legend, type="text", ...rest}: Props){
+export function GenericTextInput({ legend, fieldSetExtraClassName, type="text", ...rest}: Props){
     return (
-        <fieldset className="flex flex-1 w-80 max-h-20 mb-2 text-black">
+        <fieldset className={classMerge("flex flex-1 w-80 max-h-20 mb-2 text-black", fieldSetExtraClassName)}>
             
                 {legend && <legend className=" text-xxs font-medium mb-2 text-inherit"> {legend}</legend>} 
 

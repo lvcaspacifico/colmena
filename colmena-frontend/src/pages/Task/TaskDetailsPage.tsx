@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { api } from "../../services/api";
 import { GenericHeaderOne } from "../../components/Tipography/GenericHeaderOne";
 import { GenericButton } from "../../components/Forms/GenericButton";
 import { GenericBreadCrumb } from "../../components/General/GenericBreadCrumb";
+import { GenericMarkdownRenderField } from "../../components/Task/GenericMarkdownRenderField";
 
 type Task = {
   id: number;
@@ -60,11 +59,6 @@ export function TaskDetailsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const [isEditingContent, setIsEditingContent] = useState(false);
-  const [editedContent, setEditedContent] = useState("");
-  const [isSavingContent, setIsSavingContent] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
-
   const [taskLabels, setTaskLabels] = useState<TaskLabel[]>([]);
   const [labelsLoading, setLabelsLoading] = useState(false);
   const [showAddLabel, setShowAddLabel] = useState(false);
@@ -80,7 +74,6 @@ export function TaskDetailsPage() {
       try {
         const response = await api.get<Task>(`/tasks/task/${id}`);
         setTask(response.data);
-        setEditedContent(response.data.content);
       } catch {
         setErrorMessage("Failed to load task");
       } finally {
@@ -199,34 +192,13 @@ export function TaskDetailsPage() {
     navigate(`/tasks/edit-task/${id}`);
   }
 
-  function handleEditContent() {
-    setIsEditingContent(true);
-    setShowPreview(false);
-  }
-
-  function handleCancelEdit() {
-    setIsEditingContent(false);
-    setShowPreview(false);
-    setEditedContent(task?.content || "");
-  }
-
-  async function handleSaveContent() {
+  async function handleSaveContent(newContent: string) {
     if (!task) return;
 
-    setIsSavingContent(true);
-    try {
-      await api.put(`/tasks/${id}`, {
-        content: editedContent
-      });
-      setTask({ ...task, content: editedContent });
-      setIsEditingContent(false);
-      setShowPreview(false);
-      setErrorMessage(null);
-    } catch {
-      setErrorMessage("Error updating task content");
-    } finally {
-      setIsSavingContent(false);
-    }
+    await api.put(`/tasks/${id}`, {
+      content: newContent,
+    });
+    setTask({ ...task, content: newContent });
   }
 
   function handleShowAddLabel() {
@@ -249,88 +221,39 @@ export function TaskDetailsPage() {
 
   return (
     <>
-      <GenericBreadCrumb items={[
-        { type: "link", label: "Dashboard", to: "/" },
-        { type: "link", label: "Tasks", to: "/tasks" },
-        { type: "text", label: "Task Details"}
-      ]}> 
-      </GenericBreadCrumb>
-      
+      <GenericBreadCrumb
+        items={[
+          { type: "link", label: "Dashboard", to: "/" },
+          { type: "link", label: "Tasks", to: "/tasks" },
+          { type: "text", label: "Task Details" },
+        ]}
+      ></GenericBreadCrumb>
+
       <div className=" m-4 flex flex-col items-start">
         {isLoading ? (
           <p className="text-white mt-4">Loading task...</p>
         ) : errorMessage ? (
-          <p className="text-sm text-red-200 font-bold mt-4">⚠️ {errorMessage}.</p>
+          <p className="text-sm text-red-200 font-bold mt-4">
+            ⚠️ {errorMessage}.
+          </p>
         ) : task ? (
           <>
             <div className="w-full mb-4 flex items-start">
               <GenericHeaderOne label={task.title} extraClassName="" />
             </div>
 
-           
             <div className="w-full flex gap-4">
-              <div className="flex-1 w-4/5 bg-amber-200">  
-        
-                <div className="bg-white border-black border-1 rounded-lg p-6 mb-4 h-full">
-                  <div className="  flex justify-between items-center mb-3">
-{!isEditingContent ? (
-                    <div className="w-full min-h-64 task-content-markdown bg-gray-50 border border-gray-200 rounded p-4 min-h-64 max-h-96 overflow-y-auto prose prose-sm max-w-none">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {task.content}
-                      </ReactMarkdown>
-                    </div>
-                  ) : showPreview ? (
-                    <div className="w-full min-h-64 bg-gray-50 border border-gray-200 rounded p-4 min-h-64 max-h-96 overflow-y-auto prose prose-sm max-w-none">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {editedContent}
-                      </ReactMarkdown>
-                    </div>
-                  ) : (
-                    <textarea
-                      value={editedContent}
-                      onChange={(e) => setEditedContent(e.target.value)}
-                      className="w-full min-h-64 p-3 rounded bg-gray-50 text-black font-mono text-sm border border-gray-300 focus:outline-none focus:border-blue-400"
-                      placeholder="Enter markdown content..."
-                    />
-                  )}
-                  </div>
-                    {!isEditingContent ? (
-                      <GenericButton
-                        onClick={handleEditContent}
-                        extraClassName="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
-                      >
-                        Edit Content
-                      </GenericButton>
-                    ) : (
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => setShowPreview(!showPreview)}
-                          className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors"
-                        >
-                          {showPreview ? "Edit" : "Preview"}
-                        </button>
-                        <GenericButton
-                          onClick={handleSaveContent}
-                          disabled={isSavingContent}
-                          extraClassName="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0 disabled:bg-gray-500"
-                        >
-                          {isSavingContent ? "Saving..." : "Save"}
-                        </GenericButton>
-                        <button
-                          onClick={handleCancelEdit}
-                          className="bg-red-500 hover:bg-red-400 text-white px-3 py-1 rounded text-sm transition-colors"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    )}
-
-                  
-                </div>
+              <div className="flex-1 w-4/5 bg-amber-200">
+                <GenericMarkdownRenderField
+                  initialContent={task.content}
+                  onSave={handleSaveContent}
+                />
               </div>
               <div className="w-1/5 border-black border-1 p-4 rounded-lg">
                 <div className="bg-white border-gray-300 border-1 rounded-lg p-6 mb-4">
-                  <h2 className="text-xl text-black font-bold my-2">General Information</h2>
+                  <h2 className="text-xl text-black font-bold my-2">
+                    General Information
+                  </h2>
                   <div>
                     <p className="mb-2">
                       <span className="font-bold">Start Date: </span>
@@ -346,7 +269,7 @@ export function TaskDetailsPage() {
                     </p>
                   </div>
                 </div>
-              
+
                 <div className="bg-white border-black border-1 rounded-lg p-4 mb-4">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg text-black font-bold">Users</h2>
@@ -369,7 +292,9 @@ export function TaskDetailsPage() {
                           key={tu.userId}
                           className="flex items-center justify-between bg-black text-white px-3 py-2 rounded text-sm"
                         >
-                          <span className="font-medium truncate">{tu.user.nickname}</span>
+                          <span className="font-medium truncate">
+                            {tu.user.nickname}
+                          </span>
                           <button
                             onClick={() => removeUserFromTask(tu.userId)}
                             className="text-white hover:cursor-pointer font-bold ml-2"
@@ -383,7 +308,9 @@ export function TaskDetailsPage() {
 
                   {showAddUser && (
                     <div className="mt-4 bg-black p-3 rounded">
-                      <h3 className="text-white font-bold mb-3 text-sm">Select a User</h3>
+                      <h3 className="text-white font-bold mb-3 text-sm">
+                        Select a User
+                      </h3>
                       <div className="space-y-2 max-h-60 overflow-y-auto">
                         {availableUsers.map((user) => (
                           <button
@@ -396,7 +323,8 @@ export function TaskDetailsPage() {
                                 : "bg-green-300 hover:cursor-pointer hover:bg-green-400 text-black"
                             }`}
                           >
-                            {user.nickname} {isUserAlreadyAdded(user.id) && "(added)"}
+                            {user.nickname}{" "}
+                            {isUserAlreadyAdded(user.id) && "(added)"}
                           </button>
                         ))}
                       </div>
@@ -408,8 +336,8 @@ export function TaskDetailsPage() {
                       </button>
                     </div>
                   )}
-                </div> 
-              
+                </div>
+
                 <div className="bg-white border-black border-1 rounded-lg p-4">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg text-black font-bold">Labels</h2>
@@ -447,7 +375,9 @@ export function TaskDetailsPage() {
                   {showAddLabel && (
                     <div className="mt-4 bg-black p-3 rounded">
                       <div className="flex justify-between items-center mb-3">
-                        <h4 className="text-white font-bold text-sm">Select a Label</h4>
+                        <h4 className="text-white font-bold text-sm">
+                          Select a Label
+                        </h4>
                         <GenericButton
                           onClick={() => navigate("/labels")}
                           extraClassName="bg-black hover:cursor-pointer border-1 hover:bg-gray-700 border-white text-white px-2 py-1 rounded text-xs transition-colors w-auto h-auto mt-0"
@@ -467,7 +397,8 @@ export function TaskDetailsPage() {
                                 : "bg-green-300 hover:cursor-pointer hover:bg-green-400 text-black"
                             }`}
                           >
-                            🏷️ {label.name} {isLabelAlreadyAdded(label.id) && "(added)"}
+                            🏷️ {label.name}{" "}
+                            {isLabelAlreadyAdded(label.id) && "(added)"}
                           </button>
                         ))}
                       </div>
@@ -478,32 +409,29 @@ export function TaskDetailsPage() {
                         Cancel
                       </button>
                     </div>
-                  )}  
+                  )}
                 </div>
-                
+
                 <div className="bg-white border-black border-1 rounded-lg p-4 mt-4">
-                    <h2 className="text-lg text-black font-bold">Danger zone</h2>
-                  
-                    <div className="w-full flex justify-center gap-2 mt-4">
-                      <GenericButton
-                        onClick={navigateToEditPage}
-                        extraClassName="text-xs bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
-                      >
-                        Edit Task
-                      </GenericButton>
-                      <GenericButton
-                        onClick={deleteTask}
-                        extraClassName="text-xs bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
-                      >
-                        Delete Task
-                      </GenericButton> 
-                </div>
+                  <h2 className="text-lg text-black font-bold">Danger zone</h2>
+
+                  <div className="w-full flex justify-center gap-2 mt-4">
+                    <GenericButton
+                      onClick={navigateToEditPage}
+                      extraClassName="text-xs bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                    >
+                      Edit Task
+                    </GenericButton>
+                    <GenericButton
+                      onClick={deleteTask}
+                      extraClassName="text-xs bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                    >
+                      Delete Task
+                    </GenericButton>
+                  </div>
                 </div>
               </div>
             </div>
-
-   
-            
           </>
         ) : (
           <p className="text-white mt-4">Task not found.</p>

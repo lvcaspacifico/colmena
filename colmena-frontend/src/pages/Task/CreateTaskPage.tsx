@@ -123,6 +123,7 @@ export function CreateTaskPage() {
         <GenericTextInput
           {...register("title")}
           legend="Task Title"
+          fieldSetExtraClassName="w-full"
           type="text"
           placeholder="e.g. Fix login bug"
         />
@@ -136,6 +137,7 @@ export function CreateTaskPage() {
           {...register("content")}
           legend="Task Content"
           type="text"
+          fieldSetExtraClassName="w-full"
           placeholder="e.g. Details about the task"
         />
         {errors.content && (
@@ -165,27 +167,27 @@ export function CreateTaskPage() {
           </select>
         )}
 
-        <GenericDateInput {...register("startDate")} legend="Start Date" />
+        <GenericDateInput {...register("startDate")} legend="Start Date" fieldSetExtraClassName="w-full" />
         {errors.startDate && (
           <p className="text-xs text-center text-red-500 font-semibold mt-1 mb-2">
             {errors.startDate.message}.
           </p>
         )}
 
-        <GenericDateInput {...register("endDate")} legend="End Date (optional)" />
+        <GenericDateInput {...register("endDate")} legend="End Date (optional)" fieldSetExtraClassName="w-full" />
         {errors.endDate && (
           <p className="text-xs text-center text-red-500 font-semibold mt-1 mb-2">
             {errors.endDate.message}.
           </p>
         )}
 
-        <div className="flex gap-2 mt-4">
-          <GenericButton isLoading={isSubmitting} type="submit">
-            Save
+        <div className="flex self-center gap-2 mt-4">
+          <GenericButton extraClassName="max-w-30" isLoading={isSubmitting} type="submit">
+            Create
           </GenericButton>
-          <GenericLink to="/tasks" label="← Cancel" extraClassName="px-4 py-2" />
         </div>
       </form>
+        <GenericLink to="/tasks" label="← Back to tasks" extraClassName="px-4 py-2" />
 
       {errors.root && (
         <p className="text-sm text-red-500 text-center font-bold mt-2">

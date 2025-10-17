@@ -9,6 +9,7 @@ import { GenericTextInput } from "../../components/Forms/GenericTextInput";
 import { GenericDateInput } from "../../components/Forms/GenericDateInput";
 import { GenericButton } from "../../components/Forms/GenericButton";
 import { GenericLink } from "../../components/General/GenericLink";
+import { GenericMarkdownRenderField } from "../../components/Task/GenericMarkdownRenderField";
 
 import { api } from "../../services/api";
 
@@ -17,6 +18,16 @@ type Project = {
   name: string;
   startDate: string;
   endDate: string | null;
+  createdAt: string;
+};
+
+type Task = {
+  id: number;
+  projectId: number | null;
+  title: string;
+  content: string;
+  startDate: string;
+  endDate: string;
   createdAt: string;
 };
 
@@ -50,6 +61,7 @@ type EditTaskFormData = z.infer<typeof editTaskSchema>;
 export function EditTaskPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [task, setTask] = useState<Task | null>(null);
   const [isLoadingTask, setIsLoadingTask] = useState(true);
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoadingProjects, setIsLoadingProjects] = useState(true);
@@ -69,13 +81,14 @@ export function EditTaskPage() {
   useEffect(() => {
     async function fetchTask() {
       try {
-        const response = await api.get(`/tasks/task/${id}`);
-        const task = response.data;
+        const response = await api.get<Task>(`/tasks/task/${id}`);
+        const taskData = response.data;
+        setTask(taskData);
         reset({
-          title: task.title,
-          projectId: task.projectId,
-          startDate: task.startDate.split("T")[0],
-          endDate: task.endDate ? task.endDate.split("T")[0] : "",
+          title: taskData.title,
+          projectId: taskData.projectId,
+          startDate: taskData.startDate.split("T")[0],
+          endDate: taskData.endDate ? taskData.endDate.split("T")[0] : "",
         });
       } catch {
         setErrorMessage("Unable to load task.");
@@ -133,6 +146,15 @@ export function EditTaskPage() {
     }
   };
 
+  async function handleSaveContent(newContent: string) {
+    if (!task) return;
+
+    await api.put(`/tasks/${id}`, {
+      content: newContent,
+    });
+    setTask({ ...task, content: newContent });
+  }
+
   if (isLoadingTask) {
     return <p className="text-black mt-4 text-center">Loading task...</p>;
   }
@@ -146,11 +168,15 @@ export function EditTaskPage() {
         Update the task details below
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col my-6 w-full max-w-md">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col my-6 w-full max-w-4xl"
+      >
         <GenericTextInput
           {...register("title")}
           legend="Task Title"
           type="text"
+          fieldSetExtraClassName="w-full"
           placeholder="e.g. Fix login bug"
         />
         {errors.title && (
@@ -159,7 +185,9 @@ export function EditTaskPage() {
           </p>
         )}
 
-        <label className="text-black font-medium mt-2 mb-1">Project (optional)</label>
+        <label className="text-black font-medium mt-2 mb-1">
+          Project (optional)
+        </label>
         {isLoadingProjects ? (
           <p className="text-black mb-2">Loading projects...</p>
         ) : errorMessage ? (
@@ -178,34 +206,66 @@ export function EditTaskPage() {
           </select>
         )}
 
-        <GenericDateInput {...register("startDate")} legend="Start Date" />
+        <GenericDateInput 
+        {...register("startDate")} 
+        legend="Start Date"
+        fieldSetExtraClassName="w-full"
+        />
         {errors.startDate && (
           <p className="text-xs text-center text-red-500 font-semibold mt-1 mb-2">
             {errors.startDate.message}.
           </p>
         )}
 
-        <GenericDateInput {...register("endDate")} legend="End Date (optional)" />
+        <GenericDateInput
+          {...register("endDate")}
+          legend="End Date (optional)"
+          fieldSetExtraClassName="w-full"
+        />
         {errors.endDate && (
           <p className="text-xs text-center text-red-500 font-semibold mt-1 mb-2">
             {errors.endDate.message}.
           </p>
         )}
 
-        <div className="flex gap-2 mt-4">
-          <GenericButton isLoading={isSubmitting} type="submit" className="bg-green-600 hover:bg-green-700">
+        <div className="mt-4 mb-2">
+          <label className="text-black font-medium mb-1 block">Content</label>
+          {task && (
+            <GenericMarkdownRenderField
+              initialContent={task.content}
+              onSave={handleSaveContent}
+            />
+          )}
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <GenericButton
+            isLoading={isSubmitting}
+            type="submit"
+            extraClassName="bg-green-600 hover:bg-green-700 max-w-30"
+          >
             Save
           </GenericButton>
           <GenericButton
             type="button"
+            onClick={() => navigate(-1)}
+            extraClassName="bg-red-600 hover:bg-red-700 max-w-30"
+          >
+            Cancel
+          </GenericButton>
+          <GenericButton
+            type="button"
             onClick={handleDelete}
-            extraClassName="bg-red-600 hover:bg-red-700"
+            extraClassName=" bg-white border-1 border-red-500 text-red-500 hover:bg-red-700 hover:text-white hover:bg-red-400 max-w-30"
           >
             Delete
           </GenericButton>
         </div>
 
-        <GenericLink to={`/tasks/task-details/${id}`} label="← Back to task details" />
+        <GenericLink
+          to={`/tasks/task-details/${id}`}
+          label="← Back to task details"
+        />
       </form>
 
       {errors.root && (
