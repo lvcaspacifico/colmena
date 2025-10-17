@@ -48,7 +48,7 @@ export function GenericDashboardLine({ sharedData }: Props) {
 
           <div className="flex flex-col">
             <GenericLink
-              className="text-black font-semibold m-0"
+              extraClassName="text-black font-semibold m-0"
               label={name}
               to={
                 type === "project"

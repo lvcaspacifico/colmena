@@ -187,7 +187,7 @@ export function LabelsPage() {
             </div>
             <GenericButton
               onClick={handleOpenCreateModal}
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+              extraClassName="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
             >
               + Add Label
             </GenericButton>
@@ -227,13 +227,13 @@ export function LabelsPage() {
                   <div className="flex gap-2">
                     <GenericButton
                       onClick={() => handleOpenEditModal(label)}
-                      className="bg-yellow-600 hover:bg-yellow-700 text-white w-10 h-10 rounded transition-colors mt-0"
+                      extraClassName="bg-yellow-600 hover:bg-yellow-700 text-white w-10 h-10 rounded transition-colors mt-0"
                     >
                       ✏️
                     </GenericButton>
                     <GenericButton
                       onClick={() => handleOpenDeleteModal(label)}
-                      className="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded transition-colors mt-0"
+                      extraClassName="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded transition-colors mt-0"
                     >
                       🗑️
                     </GenericButton>

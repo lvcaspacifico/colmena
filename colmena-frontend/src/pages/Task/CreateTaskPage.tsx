@@ -183,7 +183,7 @@ export function CreateTaskPage() {
           <GenericButton isLoading={isSubmitting} type="submit">
             Save
           </GenericButton>
-          <GenericLink to="/tasks" label="← Cancel" className="px-4 py-2" />
+          <GenericLink to="/tasks" label="← Cancel" extraClassName="px-4 py-2" />
         </div>
       </form>
 

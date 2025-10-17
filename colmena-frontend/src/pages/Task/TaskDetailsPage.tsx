@@ -297,7 +297,7 @@ export function TaskDetailsPage() {
                     {!isEditingContent ? (
                       <GenericButton
                         onClick={handleEditContent}
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
+                        extraClassName="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
                       >
                         Edit Content
                       </GenericButton>
@@ -305,20 +305,20 @@ export function TaskDetailsPage() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => setShowPreview(!showPreview)}
-                          className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded text-sm transition-colors"
+                          className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors"
                         >
                           {showPreview ? "Edit" : "Preview"}
                         </button>
                         <GenericButton
                           onClick={handleSaveContent}
                           disabled={isSavingContent}
-                          className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0 disabled:bg-gray-500"
+                          extraClassName="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0 disabled:bg-gray-500"
                         >
                           {isSavingContent ? "Saving..." : "Save"}
                         </GenericButton>
                         <button
                           onClick={handleCancelEdit}
-                          className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-sm transition-colors"
+                          className="bg-red-500 hover:bg-red-400 text-white px-3 py-1 rounded text-sm transition-colors"
                         >
                           Cancel
                         </button>
@@ -352,7 +352,7 @@ export function TaskDetailsPage() {
                     <h2 className="text-lg text-black font-bold">Users</h2>
                     <GenericButton
                       onClick={handleShowAddUser}
-                      className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
+                      extraClassName="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
                     >
                       Add
                     </GenericButton>
@@ -408,15 +408,14 @@ export function TaskDetailsPage() {
                       </button>
                     </div>
                   )}
-                </div>
-
+                </div> 
               
                 <div className="bg-white border-black border-1 rounded-lg p-4">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg text-black font-bold">Labels</h2>
                     <GenericButton
                       onClick={handleShowAddLabel}
-                      className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
+                      extraClassName="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
                     >
                       Add
                     </GenericButton>
@@ -451,7 +450,7 @@ export function TaskDetailsPage() {
                         <h4 className="text-white font-bold text-sm">Select a Label</h4>
                         <GenericButton
                           onClick={() => navigate("/labels")}
-                          className="bg-black hover:cursor-pointer border-1 hover:bg-gray-700 border-white text-white px-2 py-1 rounded text-xs transition-colors w-auto h-auto mt-0"
+                          extraClassName="bg-black hover:cursor-pointer border-1 hover:bg-gray-700 border-white text-white px-2 py-1 rounded text-xs transition-colors w-auto h-auto mt-0"
                         >
                           Create
                         </GenericButton>
@@ -479,26 +478,32 @@ export function TaskDetailsPage() {
                         Cancel
                       </button>
                     </div>
-                  )}
+                  )}  
+                </div>
+                
+                <div className="bg-white border-black border-1 rounded-lg p-4 mt-4">
+                    <h2 className="text-lg text-black font-bold">Danger zone</h2>
+                  
+                    <div className="w-full flex justify-center gap-2 mt-4">
+                      <GenericButton
+                        onClick={navigateToEditPage}
+                        extraClassName="text-xs bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                      >
+                        Edit Task
+                      </GenericButton>
+                      <GenericButton
+                        onClick={deleteTask}
+                        extraClassName="text-xs bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                      >
+                        Delete Task
+                      </GenericButton> 
+                </div>
                 </div>
               </div>
             </div>
 
    
-            <div className="w-full flex justify-end gap-2 mt-4">
-              <GenericButton
-                onClick={navigateToEditPage}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
-              >
-                Edit Task
-              </GenericButton>
-              <GenericButton
-                onClick={deleteTask}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
-              >
-                Delete Task
-              </GenericButton>
-            </div>
+            
           </>
         ) : (
           <p className="text-white mt-4">Task not found.</p>

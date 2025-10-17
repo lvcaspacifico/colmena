@@ -16,7 +16,7 @@ export function GenericBreadCrumb({ items }: GenericBreadCrumbProps) {
       {items.map((item, index) => (
         <span key={index} className="flex items-center">
           {item.type === "link" ? (
-            <GenericLink to={item.to} label={item.label} className="m-0" />
+            <GenericLink to={item.to} label={item.label} extraClassName="m-0" />
           ) : (
             <span className="font-semibold">{item.label}</span>
           )}

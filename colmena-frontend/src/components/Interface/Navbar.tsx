@@ -2,6 +2,7 @@ import { useState } from "react";
 import colmenaIconSVG from "../../assets/brand-assets/colmena-icon.svg";
 import { useAuthentication } from "../../hooks/useAuthenticationContext";
 import { GenericLink } from "../General/GenericLink";
+import { GenericButton } from "../Forms/GenericButton";
 
 export function Navbar() {
   const { session, remove } = useAuthentication();
@@ -25,12 +26,24 @@ export function Navbar() {
           </button>
           {showUserMenu && (
             <ul className="w-full px-3 py-1 text-center absolute right-0 mt-2 bg-black border-1 rounded-lg border-gray-100 shadow-lg">
-               <li><GenericLink className="text-white hover:text-blue-400" label="Projects" to="/projects" /></li>
-               <li><GenericLink className="text-white hover:text-blue-400" label="Tasks" to="/tasks"/></li>
-               <li><GenericLink className="text-white hover:text-blue-400" label="Labels" to="/labels"/></li>
-               <li className="mt-4"><GenericLink className="text-white hover:text-blue-400" navigationFunction={remove} label="Sign Out" to="/projects" /></li>
+               <li><GenericLink extraClassName="text-white hover:text-blue-400" label="Projects" to="/projects" /></li>
+               <li><GenericLink extraClassName="text-white hover:text-blue-400" label="Tasks" to="/tasks"/></li>
+               <li><GenericLink extraClassName="text-white hover:text-blue-400" label="Labels" to="/labels"/></li>
+               <li className="mt-4"><GenericLink extraClassName="text-white hover:text-blue-400" navigationFunction={remove} label="Sign Out" to="/projects" /></li>
             </ul>
           )}
+        </div>
+      )}
+
+      {!showLoggedOptions && (
+        <div className="flex  gap-1 justify-center items-center text-center">
+           <GenericLink
+          to="/sign in" label="Sign In" extraClassName="m-0 text-white"></GenericLink>
+          <br />
+          <GenericLink
+          to="/sign in" label="Get Started" extraClassName="text-white no-underline hover:bg-colmena-orange-500 hover:text-white 
+          rounded-md
+          bg-colmena-orange px-6 py-1 m-0"></GenericLink>
         </div>
       )}
     </nav>

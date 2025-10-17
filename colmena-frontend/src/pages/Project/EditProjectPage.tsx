@@ -146,7 +146,7 @@ export function EditProjectPage() {
         )}
 
         <div className="flex gap-2 mt-4">
-          <GenericButton isLoading={isSubmitting} type="submit" className="bg-green-600 hover:bg-green-700 max-w-35">
+          <GenericButton isLoading={isSubmitting} type="submit" extraClassName="bg-green-600 hover:bg-green-700 max-w-35">
             Save
           </GenericButton>
           <GenericButton

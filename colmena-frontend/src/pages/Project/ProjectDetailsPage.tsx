@@ -322,13 +322,13 @@ export function ProjectDetailsPage() {
                      <div className="flex gap-2 self-start">
                   <GenericButton
                   onClick={navigateToEditPage}
-                  className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                  extraClassName="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
                   >
                   Edit Project
                   </GenericButton>
                   <GenericButton
                   onClick={deleteProject}
-                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                  extraClassName="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
                   >
               Delete Project
             </GenericButton>
@@ -373,7 +373,7 @@ export function ProjectDetailsPage() {
                     <h2 className="text-xl text-black font-bold">Project Tasks</h2>
                     <GenericButton
                       onClick={handleShowAddTask}
-                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                      extraClassName="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
                     >
                       Add new
                     </GenericButton>
@@ -399,7 +399,7 @@ export function ProjectDetailsPage() {
                           <div className="flex gap-2">
                             <GenericButton
                               onClick={() => navigate(`/tasks/task-details/${task.id}`)}
-                              className="bg-black hover:bg-gray-700 border-1 border-white text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
+                              extraClassName="bg-black hover:bg-gray-700 border-1 border-white text-white px-3 py-1 rounded text-sm transition-colors w-auto h-auto mt-0"
                             >
                               View
                             </GenericButton>
@@ -451,7 +451,7 @@ export function ProjectDetailsPage() {
                     <h2 className="text-xl text-black font-bold">Project Labels</h2>
                     <GenericButton
                       onClick={handleShowAddLabel}
-                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                      extraClassName="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
                     >
                       Add new
                     </GenericButton>
@@ -486,7 +486,7 @@ export function ProjectDetailsPage() {
                         <h3 className="text-white font-bold">Select a Label</h3>
                         <GenericButton
                           onClick={() => navigate("/labels")}
-                          className="bg-bçacl hover:cursor-pointer border-1 hover:bg-gray-700 border-white text-white px-4 py-2 rounded text-sm transition-colors w-auto h-auto mt-0"
+                          extraClassName="bg-bçacl hover:cursor-pointer border-1 hover:bg-gray-700 border-white text-white px-4 py-2 rounded text-sm transition-colors w-auto h-auto mt-0"
                         >
                           Create new
                         </GenericButton>
@@ -524,7 +524,7 @@ export function ProjectDetailsPage() {
                     <h2 className="text-xl text-black font-bold">Project Users</h2>
                     <GenericButton
                       onClick={handleShowAddUser}
-                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+                      extraClassName="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
                     >
                       Add new
                     </GenericButton>

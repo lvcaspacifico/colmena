@@ -55,7 +55,7 @@ export function TasksPage() {
           <GenericHeaderOne label="Tasks" />
           <GenericButton
             onClick={handleGoToCreateTask}
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
+            extraClassName="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0"
           >
             + Add Task
           </GenericButton>
@@ -79,7 +79,7 @@ export function TasksPage() {
                     T
                   </div>
                   <GenericLink
-                    className="text-md text-black font-semibold m-0"
+                    extraClassName="text-md text-black font-semibold m-0"
                     to={`/tasks/task-details/${task.id}`}
                     label={task.title}
                   />

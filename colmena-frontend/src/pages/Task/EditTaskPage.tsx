@@ -199,7 +199,7 @@ export function EditTaskPage() {
           <GenericButton
             type="button"
             onClick={handleDelete}
-            className="bg-red-600 hover:bg-red-700"
+            extraClassName="bg-red-600 hover:bg-red-700"
           >
             Delete
           </GenericButton>

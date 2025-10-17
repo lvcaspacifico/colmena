@@ -5,9 +5,9 @@ export function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="flex justify-center items-center">
       <div className="flex flex-col items-center">
-        <h1 className="text-black font-semibold text-5xl">
+        <h1 className="mt-80 text-black font-semibold text-5xl">
           Join the hive.
         </h1>
 

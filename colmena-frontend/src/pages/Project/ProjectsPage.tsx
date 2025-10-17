@@ -54,7 +54,7 @@ export function ProjectsPage() {
         <GenericHeaderOne label="Projects"/>
         <GenericButton
           onClick={handleGoToCreateProject}
-          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0">
+          extraClassName="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors w-auto h-auto mt-0">
                Create new
           </GenericButton>
       </div>
@@ -76,7 +76,7 @@ export function ProjectsPage() {
               <div className="flex items-center gap-2">
                 <div className="text-black bg-pink-300 w-10 h-10 flex 
                 items-center justify-center rounded border-1 border-gray-300">P</div>
-                <GenericLink className="text-md text-black font-semibold m-0" to={`/projects/project-details/${project.id}`} label={project.name}/>
+                <GenericLink extraClassName="text-md text-black font-semibold m-0" to={`/projects/project-details/${project.id}`} label={project.name}/>
               </div>
             
             
