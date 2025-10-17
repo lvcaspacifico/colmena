@@ -19,7 +19,7 @@ export function Navbar() {
         <div className="relative">
           <button
             onClick={toggleUserMenu}
-            className="text-white font-medium px-4 py-2 border-1 rounded-lg  border-gray-100 hover:bg-gray-800"
+            className="hover:cursor-pointer min-w-40 text-white font-medium px-4 py-2 border-1 rounded-lg  border-gray-100 hover:bg-gray-800"
           >
             Hello, <strong>{session?.user.nickname}</strong>! 👋🏻
           </button>

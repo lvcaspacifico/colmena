@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router";
 import { AuthenticationRoutes } from "./AuthenticationRoutes";
 import { HasRoleCodeRoutes } from "./HasRoleCodeRoutes"; 
 import { useAuthentication } from "../hooks/useAuthenticationContext";
-import { GenericLoading } from "../components/Loadings/GenericLoading";
+import { GenericLoading } from "../components/General/GenericLoading";
 
 export function IndexRoutes(){  
     const { session , isLoading } = useAuthentication() 

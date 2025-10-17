@@ -5,6 +5,11 @@ import { GenericHeaderOne } from "../../components/Tipography/GenericHeaderOne";
 import { GenericLink } from "../../components/General/GenericLink";
 import debounce from "lodash.debounce";
 import { useAuthentication } from "../../hooks/useAuthenticationContext";
+import { GenericDashboardKPI } from "../../components/Dashboard/GenericDashboardKPI";
+import { GenericDashboardSearchField } from "../../components/Dashboard/GenericDashboardSearchField";
+import { GenericDashboardTabManager } from "../../components/Dashboard/GenericDashboardTabManager";
+import { GenericDashboardLine } from "../../components/Dashboard/GenericDashboardLine";
+import { GenericLoading } from "../../components/General/GenericLoading";
 
 type Project = {
   id: number;
@@ -97,91 +102,30 @@ export function DashboardPage() {
     return { projects: projectsFiltered, tasks: tasksFiltered };
   }, [projects, tasks, userProjects, userTasks, debouncedSearch]);
 
-  function renderItem(item: Project | Task, type: "project" | "task", joinedAt?: string) {
-    const name = type === "project" ? (item as Project).name : (item as Task).title;
-    const createdAt = item.createdAt;
-    return (
-      <li key={`${type}-${item.id}`} className="flex justify-between items-center bg-black/20 p-3 rounded mb-2">
-        <div className="flex items-center gap-3">
-          <div className="bg-gray-500 text-white w-10 h-10 flex items-center justify-center rounded">
-            {name.charAt(0)}
-          </div>
-          <div className="flex flex-col">
-            <GenericLink
-              label={name}
-              to={type === "project" ? `/projects/project-details/${item.id}` : `/tasks/task-details/${item.id}`}
-              className="text-white font-semibold"
-            />
-            <span className="text-gray-300 text-sm">{type}</span>
-          </div>
-        </div>
-        <div className="text-gray-300 text-sm text-right">
-          <div>{new Date(createdAt).toLocaleDateString()}</div>
-          {joinedAt && <div>Joined at: {new Date(joinedAt).toLocaleDateString()}</div>}
-        </div>
-      </li>
-    );
-  }
-
-  const sharedData = activeTab === "shared" ? filteredShared : filteredOther;
-  const otherData = activeTab === "shared" ? filteredOther : filteredShared;
+  const sharedData = (activeTab === "shared" ? filteredShared : filteredOther);
 
   return (
     <>
       <GenericBreadCrumb items={[{ type: "text", label: "Dashboard" }]} />
       <div className="p-4">
-        <GenericHeaderOne label="Dashboard" />
-        <div className="grid grid-cols-4 gap-4 mt-6">
-          <div className="bg-blue-600 p-4 rounded text-white">
-            <div>Total Projects</div>
-            <div className="text-2xl font-bold">{projects.length}</div>
-          </div>
-          <div className="bg-green-600 p-4 rounded text-white">
-            <div>Total My Projects</div>
-            <div className="text-2xl font-bold">{userProjects.length}</div>
-          </div>
-          <div className="bg-purple-600 p-4 rounded text-white">
-            <div>Total Tasks</div>
-            <div className="text-2xl font-bold">{tasks.length}</div>
-          </div>
-          <div className="bg-yellow-600 p-4 rounded text-white">
-            <div>Total My Tasks</div>
-            <div className="text-2xl font-bold">{userTasks.length}</div>
-          </div>
+        <GenericHeaderOne extraClassName="text-start  mb-4" label="Dashboard" />
+        <div className="grid grid-cols-4 gap-4">
+          <GenericDashboardKPI label="All Projects" kpi={projects.length}/>
+          <GenericDashboardKPI label="All Tasks" kpi={tasks.length}/>
+          <GenericDashboardKPI label="My Projects" kpi={userProjects.length}/>
+          <GenericDashboardKPI label="My Tasks" kpi={userTasks.length}/>
         </div>
+        <GenericDashboardSearchField value={search} onChange={(e) => setSearch(e.target.value)} />
+        <GenericDashboardTabManager
+          tabs={[
+            { id: "shared", label: "Shared projects and tasks" },
+            { id: "other", label: "Other projects and tasks" },
+          ]}
+          activeTab={activeTab}
+          onClickCustom={setActiveTab}/>
 
-        <div className="mt-8">
-          <input
-            type="text"
-            placeholder="Search projects and tasks..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="p-2 rounded border w-full mb-4"
-          />
-          <div className="flex gap-4 mb-4">
-            <button
-              onClick={() => setActiveTab("shared")}
-              className={`px-4 py-2 rounded ${activeTab === "shared" ? "bg-blue-600 text-white" : "bg-gray-300"}`}
-            >
-              Shared projects and tasks
-            </button>
-            <button
-              onClick={() => setActiveTab("other")}
-              className={`px-4 py-2 rounded ${activeTab === "other" ? "bg-blue-600 text-white" : "bg-gray-300"}`}
-            >
-              Other projects and tasks
-            </button>
-          </div>
-          {isLoading ? (
-            <p className="text-white">Loading...</p>
-          ) : (
-            <ul>
-              {sharedData.projects.map(p => renderItem(p, "project", p.createdAt))}
-              {sharedData.tasks.map(t => renderItem(t, "task", t.createdAt))}
-            </ul>
-          )}
+          {isLoading ? <GenericLoading/> : <GenericDashboardLine sharedData={sharedData} />}
         </div>
-      </div>
     </>
   );
 }

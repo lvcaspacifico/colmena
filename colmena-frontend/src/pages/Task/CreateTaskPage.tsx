@@ -31,7 +31,10 @@ const createTaskSchema = z
       .string()
       .trim()
       .min(2, { message: "Content must be at least 2 characters long" }),
-    projectId: z.number().nullable(),
+    projectId: z
+        .union([z.number(), z.null()])
+        .nullable()
+        .transform((val) => (val === null ? null : val)),
     startDate: z
       .string()
       .regex(/^\d{4}-\d{2}-\d{2}$/, { message: "Start date must be filled" }),
@@ -148,7 +151,9 @@ export function CreateTaskPage() {
           <p className="text-red-500 text-sm mb-2">⚠️ {errorMessage}</p>
         ) : (
           <select
-            {...register("projectId", { valueAsNumber: true })}
+            {...register("projectId", {
+              setValueAs: (v) => (v === "" ? null : Number(v))
+            })}
             className="w-full px-3 py-2 rounded mb-2 border border-gray-300"
           >
             <option value="">No project</option>
