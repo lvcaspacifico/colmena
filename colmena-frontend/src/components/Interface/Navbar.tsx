@@ -19,7 +19,7 @@ export function Navbar() {
 
   return (
     <nav className="bg-black p-4 flex justify-between items-center relative">
-        <img className="w-8 h-8" src={colmenaIconSVG} alt="Colmena's logo" />
+        <a href="/"><img className="w-8 h-8" src={colmenaIconSVG} alt="Colmena's logo" /></a>
 
       {showLoggedOptions && (
         <div className="relative">
