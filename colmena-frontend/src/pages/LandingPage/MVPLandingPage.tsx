@@ -116,7 +116,6 @@ export function MVPLandingPage() {
 
   return (
     <div className="w-full min-h-screen bg-white">
-      {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -147,8 +146,6 @@ export function MVPLandingPage() {
           </div>
         </div>
       </nav>
-
-      {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-4xl mx-auto">
@@ -178,8 +175,6 @@ export function MVPLandingPage() {
           </div>
         </div>
       </section>
-
-      {/* Social Proof */}
       <section className="py-12 bg-white border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-gray-500 mb-8">Trusted by teams at leading companies</p>

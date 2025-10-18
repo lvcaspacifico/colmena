@@ -57,3 +57,12 @@
   display: block;
   overflow-x: auto;
 }
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* metade do container, por isso duplicamos as imagens */
+}
+
+.animate-slide {
+  animation: slide 10s linear infinite;
+}

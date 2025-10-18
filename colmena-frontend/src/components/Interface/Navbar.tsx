@@ -1,14 +1,17 @@
 import { useState } from "react";
 import colmenaIconSVG from "../../assets/brand-assets/colmena-icon.svg";
 import { useAuthentication } from "../../hooks/useAuthenticationContext";
-import { GenericLink } from "../General/GenericLink";
-import { GenericButton } from "../Forms/GenericButton";
+import { GenericLink } from "../General/GenericLink"; 
+import { useLocation } from "react-router";
 
 export function Navbar() {
   const { session, remove } = useAuthentication();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const toggleUserMenu = () => setShowUserMenu((prev) => !prev);
+
+  const location = useLocation();
+  const isSignupPage = location.pathname === "/signup" || location.pathname === "/signin";
 
   let showLoggedOptions = !!session?.user;
 
@@ -35,15 +38,15 @@ export function Navbar() {
         </div>
       )}
 
-      {!showLoggedOptions && (
-        <div className="flex  gap-1 justify-center items-center text-center">
+      {(!showLoggedOptions && !isSignupPage) && (
+        <div className="flex  gap-4 justify-center items-center text-center">
            <GenericLink
-          to="/sign in" label="Sign In" extraClassName="m-0 text-white"></GenericLink>
+          to="/signin" label="Sign In" extraClassName="m-0 text-white no-underline"></GenericLink>
           <br />
           <GenericLink
-          to="/sign in" label="Get Started" extraClassName="text-white no-underline hover:bg-colmena-orange-500 hover:text-white 
+          to="/signup" label="Get Started" extraClassName="text-white no-underline hover:bg-colmena-orange-500 hover:text-white 
           rounded-md
-          bg-colmena-orange px-6 py-1 m-0"></GenericLink>
+          bg-colmena-orange px-6 py-3 m-0"></GenericLink>
         </div>
       )}
     </nav>
