@@ -5,6 +5,7 @@ import { GenericHeaderOne } from "../../components/Tipography/GenericHeaderOne";
 import { GenericButton } from "../../components/Forms/GenericButton";
 import { GenericBreadCrumb } from "../../components/General/GenericBreadCrumb";
 import { GenericMarkdownRenderField } from "../../components/Task/GenericMarkdownRenderField";
+import { GenericLabel } from "../../components/Label/GenericLabel";
 
 type Task = {
   id: number;
@@ -356,18 +357,12 @@ export function TaskDetailsPage() {
                   ) : (
                     <div className="flex flex-wrap gap-2">
                       {taskLabels.map((tl) => (
-                        <div
+                        <GenericLabel
                           key={tl.labelId}
-                          className="flex items-center gap-1 bg-black text-white font-semibold px-2 py-1 rounded text-xs"
-                        >
-                          <span>🏷️ {tl.label.name}</span>
-                          <button
-                            onClick={() => removeLabelFromTask(tl.labelId)}
-                            className="text-white hover:cursor-pointer font-bold"
-                          >
-                            ✕
-                          </button>
-                        </div>
+                          name={tl.label.name}
+                          color={tl.label.color}
+                          onRemove={() => removeLabelFromTask(tl.labelId)}
+                        />
                       ))}
                     </div>
                   )}

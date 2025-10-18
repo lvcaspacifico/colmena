@@ -105,11 +105,12 @@ Outras especificações:
 git clone <URL_DO_REPOSITORIO>
 ```
 
-## 🕹️ Devlog (⚠️WIP)
+## 🕹️ Dev logs (⚠️WIP)
 
 - 14-10-2025 ≈7h
 - 15-10-2025 ≈5h
-- 16-10-2025 ≈4h
+- 16-10-2025 ≈8h
+- 17-10-2025 ≈3h
 
 ---
 

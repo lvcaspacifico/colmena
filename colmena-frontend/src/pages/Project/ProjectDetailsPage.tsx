@@ -4,6 +4,7 @@ import { api } from "../../services/api";
 import { GenericHeaderOne } from "../../components/Tipography/GenericHeaderOne";
 import { GenericButton } from "../../components/Forms/GenericButton"
 import { GenericBreadCrumb } from "../../components/General/GenericBreadCrumb";
+import { GenericLabel } from "../../components/Label/GenericLabel";
 import { formatDateTimeString } from "../../utils/String/formatDateTimeString";
 
 type Project = {
@@ -464,18 +465,12 @@ export function ProjectDetailsPage() {
                   ) : (
                     <div className="flex flex-wrap gap-2">
                       {projectLabels.map((pl) => (
-                        <div
+                        <GenericLabel
                           key={pl.labelId}
-                          className="flex items-center gap-2 bg-black text-white font-semibold px-3 py-2 rounded"
-                        >
-                          <span>🏷️ {pl.label.name}</span>
-                          <button
-                            onClick={() => removeLabelFromProject(pl.labelId)}
-                            className="text-white hover:cursor-pointer font-bold"
-                          >
-                            ✕
-                          </button>
-                        </div>
+                          name={pl.label.name}
+                          color={pl.label.color}
+                          onRemove={() => removeLabelFromProject(pl.labelId)}
+                        />
                       ))}
                     </div>
                   )}
@@ -486,7 +481,7 @@ export function ProjectDetailsPage() {
                         <h3 className="text-white font-bold">Select a Label</h3>
                         <GenericButton
                           onClick={() => navigate("/labels")}
-                          extraClassName="bg-bçacl hover:cursor-pointer border-1 hover:bg-gray-700 border-white text-white px-4 py-2 rounded text-sm transition-colors w-auto h-auto mt-0"
+                          extraClassName="bg-black hover:cursor-pointer border-1 hover:bg-gray-700 border-white text-white px-4 py-2 rounded text-sm transition-colors w-auto h-auto mt-0"
                         >
                           Create new
                         </GenericButton>
