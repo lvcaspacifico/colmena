@@ -4,7 +4,7 @@ services:
     name: colmena-backend
     runtime: node
     region: oregon
-    plan: free
+    plan: starter
     rootDir: backend
     buildCommand: npm install && npm run db:generate && npm run build
     startCommand: npm start
@@ -28,7 +28,7 @@ services:
   - type: web
     name: colmena-frontend
     runtime: static
-    plan: free
+    plan: starter
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
@@ -44,5 +44,5 @@ services:
 databases:
   - name: colmena-db
     databaseName: colmena
-    plan: free
+    plan: starter
     region: oregon
