@@ -1,6 +1,6 @@
 [build]
 builder = "NIXPACKS"
-watchPatterns = ["backend/**", "frontend/**"]
+watchPatterns = ["colmena-backend/**", "colmena-frontend/**"]
 
 [deploy]
 startCommand = "echo 'Use service-specific configs'"
