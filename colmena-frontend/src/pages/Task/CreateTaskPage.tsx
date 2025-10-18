@@ -9,6 +9,7 @@ import { GenericTextInput } from "../../components/Forms/GenericTextInput";
 import { GenericDateInput } from "../../components/Forms/GenericDateInput";
 import { GenericButton } from "../../components/Forms/GenericButton";
 import { GenericLink } from "../../components/General/GenericLink";
+import { GenericMarkdownRenderField } from "../../components/Task/GenericMarkdownRenderField";
 
 import { api } from "../../services/api";
 
@@ -27,10 +28,6 @@ const createTaskSchema = z
       .trim()
       .min(2, { message: "Title must be at least 2 characters long" })
       .max(200, { message: "Title must be at most 200 characters long" }),
-    content: z
-      .string()
-      .trim()
-      .min(2, { message: "Content must be at least 2 characters long" }),
     projectId: z
         .union([z.number(), z.null()])
         .nullable()
@@ -59,6 +56,7 @@ export function CreateTaskPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoadingProjects, setIsLoadingProjects] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [content, setContent] = useState("");
 
   const {
     register,
@@ -91,7 +89,7 @@ export function CreateTaskPage() {
     try {
       const payload = {
         title: data.title,
-        content: data.content,
+        content: content,
         projectId: data.projectId || null,
         startDate: data.startDate,
         endDate: data.endDate || undefined,
@@ -110,6 +108,10 @@ export function CreateTaskPage() {
     }
   };
 
+  async function handleSaveContent(newContent: string) {
+    setContent(newContent);
+  }
+
   return (
     <div className="w-full flex flex-col items-center">
       <h1 className="text-3xl font-bold text-black text-center mt-20 mb-2">
@@ -119,7 +121,7 @@ export function CreateTaskPage() {
         Fill out the details below to create a new task
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col my-6 w-full max-w-md">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col my-6 w-full max-w-4xl">
         <GenericTextInput
           {...register("title")}
           legend="Task Title"
@@ -130,19 +132,6 @@ export function CreateTaskPage() {
         {errors.title && (
           <p className="text-xs text-center text-red-500 font-semibold mt-1 mb-2">
             {errors.title.message}.
-          </p>
-        )}
-
-        <GenericTextInput
-          {...register("content")}
-          legend="Task Content"
-          type="text"
-          fieldSetExtraClassName="w-full"
-          placeholder="e.g. Details about the task"
-        />
-        {errors.content && (
-          <p className="text-xs text-center text-red-500 font-semibold mt-1 mb-2">
-            {errors.content.message}.
           </p>
         )}
 
@@ -181,13 +170,33 @@ export function CreateTaskPage() {
           </p>
         )}
 
-        <div className="flex self-center gap-2 mt-4">
-          <GenericButton extraClassName="max-w-30" isLoading={isSubmitting} type="submit">
+        <div className="mt-4 mb-2">
+          <label className="text-black font-medium mb-1 block">Content</label>
+          <GenericMarkdownRenderField
+            initialContent={content}
+            onSave={handleSaveContent}
+          />
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <GenericButton
+            isLoading={isSubmitting}
+            type="submit"
+            extraClassName="bg-green-600 hover:bg-green-700 max-w-30"
+          >
             Create
           </GenericButton>
+          <GenericButton
+            type="button"
+            onClick={() => navigate(-1)}
+            extraClassName="bg-red-600 hover:bg-red-700 max-w-30"
+          >
+            Cancel
+          </GenericButton>
         </div>
-      </form>
+
         <GenericLink to="/tasks" label="← Back to tasks" extraClassName="px-4 py-2" />
+      </form>
 
       {errors.root && (
         <p className="text-sm text-red-500 text-center font-bold mt-2">

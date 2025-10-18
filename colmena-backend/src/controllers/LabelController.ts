@@ -53,7 +53,7 @@ class LabelController {
 
     async showForProject(request: Request, response: Response) {
         const labels = await prisma.label.findMany({
-            where: { type: 2 },
+            where: { type: { in: [1, 2] } },
             select: {
             id: true,
             type: true,
@@ -70,7 +70,7 @@ class LabelController {
 
     async showForTask(request: Request, response: Response) {
         const labels = await prisma.label.findMany({
-            where: { type: 3 },
+            where: { type: { in: [1, 3] } },
             select: {
             id: true,
             type: true,

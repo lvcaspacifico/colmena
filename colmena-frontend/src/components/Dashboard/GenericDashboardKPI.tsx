@@ -8,7 +8,7 @@ type Props = {
 
 export function GenericDashboardKPI({ label, extraClassName, kpi }: Props ){
     return (
-        <div className={classMerge("border-black border-1 rounded-lg  p-4 rounded text-black", extraClassName)}>
+        <div className={classMerge("border-black border-1 rounded-lg  p-4  text-black", extraClassName)}>
             <p className="text-sm text-gray-700">{label}</p>
             <p className="text-2xl font-bold text-gray-900">{kpi}</p>
         </div>
