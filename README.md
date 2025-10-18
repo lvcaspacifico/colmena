@@ -1,23 +1,51 @@
 # 🐝 Colmena
 
-> Colmena ("_colméia_" em espanhol) 🍯
+![banner](https://i.imgur.com/y4yuN8j.png)
+
+---
+
+<div align="center">
+<div><a href="#en">About the project <img src="https://i.imgur.com/KD6jqaU.png" height="25" align="texttop"></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="#pt-br">Sobre o projeto <img src="https://i.imgur.com/OkaYl5H.png" height="25" align="texttop"></div>
+</div>
+
+---
+
+## <a id="en"></a>About the project  <img src="https://i.imgur.com/KD6jqaU.png" height="35" align="texttop">
+
+> <a href="https://colmena-production.up.railway.app/">Colmena 🔗<a> ("_beehive_" in spanish) <img src="https://i.imgur.com/jDJisBP.png" height="25" align="texttop">
+
+A robust platform for **project management** and **team collaboration**.
+
+**Main features:**
+
+- Create projects
+- Create tasks
+- Create labels for projects and tasks
+- Manage deadlines for projects and tasks
+- Dashboard with strategic KPIs and search feature
+- Manage relationship between users to projects and tasks
+- Style task content with live-rendered Markdown
+- Secure login with JWT token 
+
+## <a id="pt-br"></a>Sobre o projeto <img src="https://i.imgur.com/OkaYl5H.png" height="35" align="texttop">
+ 
+> <a href="https://colmena-production.up.railway.app/">Colmena 🔗<a> <img src="https://i.imgur.com/jDJisBP.png" height="25" align="texttop">  
 
 Plataforma robusta para **gerenciamento de projetos** e **colaboração entre times**.
 
-Principais funcionalidades:
+**Principais funcionalidades:**
 
 - Criar projetos
-- Criar tarefas atreladas (ou não) à projetos
-- Criar e atrelar labels em projetos e em tarefas
-- Gerenciamento de prazos de projetos e de tarefas
-- Criar multiplas visualizações de projetos e tarefas
-    - Exemplo: Por prazo, por label, por usuário, etc
-- Atrelar usuários a projetos
-- Atrelar usuários a tarefas
-- Estilizar o conteúdo de uma tarefa com Markdown renderizado ao vivo em tela
+- Criar tarefas
+- Criar labels para projetos e tarefas
+- Gerenciar prazos de projetos e tarefas
+- Dashboard com KPIs estratégicos e recurso de busca
+- Gerenciar a relação entre usuários e projetos/tarefas
+- Estilizar o conteúdo das tarefas com Markdown renderizado ao vivo
 - Login seguro com token JWT
-- Funcionalidades com modelo RBAC (role based access control)
-- Dashboard e funcionalidades exclusivas para usuários administradores
+
+# 🦓 Stack
 
 ## 🎲 Backend
 
@@ -32,7 +60,6 @@ Principais funcionalidades:
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)
-![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
 
 </div>
 
@@ -42,15 +69,6 @@ Principais funcionalidades:
 - PostgreSQL 16
 - Prisma 6
 - Docker 24+
-
-Outras especificações:
-
-- bcrypt para hash de senhas
-- jsonwebtoken para autenticação JWT
-- multer para upload de arquivos
-- zod para validação de dados
-- cors para controle de acesso
-
 
 ## 🎨 Frontend
 
@@ -74,44 +92,11 @@ Outras especificações:
 - Vite 7
 - TailwindCSS 4
 - Tailwind Merge
-
-Outras especificações:
-
-- Axios para requisições HTTP
-- Zod para validação de dados
-- ESLint para padronização do código
-- React Router para navegação
-- @tailwindcss/vite para integração com Vite
-
-
-## ☁️ Deploy (⚠️WIP)
-<div align="center">
-
-![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-
-</div>
-
-- Plano Free do Render
-- Pipeline via `render.yaml` + Github
-
-## 📜 Scripts (⚠️WIP)
-
-## 📄 Instalação (⚠️WIP)
-
-1. Clone o repositório:
-
-```bash
-git clone <URL_DO_REPOSITORIO>
-```
-
-## 🕹️ Dev logs (⚠️WIP)
-
-- 14-10-2025 ≈7h
-- 15-10-2025 ≈5h
-- 16-10-2025 ≈8h
-- 17-10-2025 ≈3h
-
+- Axios
+- Zod
+- ESLint
+- React Router
+ 
 ---
 
 > Made with ☕ by [@lvcaspacifico](https://github.com/lvcaspacifico) 👋
