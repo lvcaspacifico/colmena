@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "scripts": {
-     "dev": "tsx watch src/server.ts",
-    "build": "tsup src",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src && npm run db:migrate",
     "start": "node dist/server.js",
     "db:migrate": "prisma migrate deploy",
     "db:generate": "prisma generate",
