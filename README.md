@@ -15,6 +15,10 @@
 
 > <a href="https://colmena-production.up.railway.app/">Colmena 🔗<a> ("_beehive_" in spanish) <img src="https://i.imgur.com/jDJisBP.png" height="25" align="texttop">
 
+> [!IMPORTANT]  
+> This project is **desktop-first**. Responsiveness for smaller screens is being **gradually implemented**.  
+> If you can see this notice, the process is **still in progress**.
+
 A robust platform for **project management** and **team collaboration**.
 
 **Main features:**
@@ -44,7 +48,11 @@ A robust platform for **project management** and **team collaboration**.
 
 ## <a id="pt-br"></a>Sobre o projeto <img src="https://i.imgur.com/OkaYl5H.png" height="35" align="texttop">
  
-> <a href="https://colmena-production.up.railway.app/">Colmena 🔗<a>("_colméia_" em espanhol)  <img src="https://i.imgur.com/jDJisBP.png" height="25" align="texttop">  
+> <a href="https://colmena-production.up.railway.app/">Colmena 🔗<a>("_colméia_" em espanhol)  <img src="https://i.imgur.com/jDJisBP.png" height="25" align="texttop">
+
+> [!IMPORTANT]  
+> Esse projeto é **desktop-first**. A responsividade para dispositivos com telas menores está sendo **gradualmente implementada**.  
+> Se você pode ver este aviso, esse processo **ainda está em progresso**.
 
 Plataforma robusta para **gerenciamento de projetos** e **colaboração entre times**.
 
