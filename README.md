@@ -28,6 +28,20 @@ A robust platform for **project management** and **team collaboration**.
 - Style task content with live-rendered Markdown
 - Secure login with JWT token 
 
+**How to use:**
+
+1. Explore the landing page and sign in/sign up pages at will
+2. To use other features, you can sign in with the credentials bellow:
+
+| Nickname | Email | Password | Role |
+|----------|-------|----------|------|
+| Lucas [ADMIN] | lucas@colmena.com | Colmenaplayers2025@! | Admin (1) |
+
+3. You have admin access on all features
+4. In case there's no project or task, feel free to create and test it out! ✨
+
+> 💡 **Pro tip:** Check out the live Markdown render feature on the Task's description field!
+
 ## <a id="pt-br"></a>Sobre o projeto <img src="https://i.imgur.com/OkaYl5H.png" height="35" align="texttop">
  
 > <a href="https://colmena-production.up.railway.app/">Colmena 🔗<a> <img src="https://i.imgur.com/jDJisBP.png" height="25" align="texttop">  
@@ -44,6 +58,20 @@ Plataforma robusta para **gerenciamento de projetos** e **colaboração entre ti
 - Gerenciar a relação entre usuários e projetos/tarefas
 - Estilizar o conteúdo das tarefas com Markdown renderizado ao vivo
 - Login seguro com token JWT
+
+**Como usar:**
+
+1. Explore a landing page e páginas de login/cadastro à vontade
+2. Para usar as demais funcionaldades, você pode logar com as credenciais abaixo:
+
+| Nickname | Email | Password | Role |
+|----------|-------|----------|------|
+| Lucas [ADMIN] | lucas@colmena.com | Colmenaplayers2025@! | Admin (1) |
+
+3. Você terá acesso de administrador a todas as funcionalidades
+4. Caso não tenha nenhum projeto ou tarefa, sinta-se livre para criar e testar tudo! ✨
+
+> 💡 **Pro tip:** Dê uma olhada na funcionalidade de descrição em Markdown das tarefas renderizada ao vivo! 
 
 # 🦓 Stack
 
