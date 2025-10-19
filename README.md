@@ -37,7 +37,7 @@ A robust platform for **project management** and **team collaboration**.
 |----------|-------|----------|------|
 | Lucas [ADMIN] | lucas@colmena.com | Colmenaplayers2025@! | Admin (1) |
 
-3. You have admin access on all features
+3. You'll have admin access to all features
 4. In case there's no project or task, feel free to create and test it out! ✨
 
 > 💡 **Pro tip:** Check out the live Markdown render feature on the Task's description field!
