@@ -44,7 +44,7 @@ A robust platform for **project management** and **team collaboration**.
 
 ## <a id="pt-br"></a>Sobre o projeto <img src="https://i.imgur.com/OkaYl5H.png" height="35" align="texttop">
  
-> <a href="https://colmena-production.up.railway.app/">Colmena 🔗 ("_colméia_" em espanhol) <a> <img src="https://i.imgur.com/jDJisBP.png" height="25" align="texttop">  
+> <a href="https://colmena-production.up.railway.app/">Colmena 🔗<a>("_colméia_" em espanhol)  <img src="https://i.imgur.com/jDJisBP.png" height="25" align="texttop">  
 
 Plataforma robusta para **gerenciamento de projetos** e **colaboração entre times**.
 
